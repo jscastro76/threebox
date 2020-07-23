@@ -1,6 +1,6 @@
 window.test = require('tape');
 // Threebox = require("../src/Threebox.js");
-// THREE = require("../src/three.js");
+// THREE = require("three");
 
 // window.runTests = function () {
 //     // material(instance);
@@ -14,7 +14,7 @@ function vector3Equals(t, input, expected, allowableError, epsilon) {
     dX = Math.abs(input.x - expected.x) / (expected.x === 0 ? 1 : expected.x);
     dY = Math.abs(input.y - expected.y) / (expected.y === 0 ? 1 : expected.y);
     dZ = Math.abs(input.z - expected.z) / (expected.z === 0 ? 1 : expected.z);
-    
+
     if (dX < epsilon) dX = 0;
     if (dY < epsilon) dY = 0;
     if (dZ < epsilon) dZ = 0;
