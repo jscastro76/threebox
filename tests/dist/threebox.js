@@ -19449,7 +19449,7 @@ arguments[4][4][0].apply(exports,arguments)
 // - specify a `material` string, `color`, and/or `opacity` as modifications of the default material
 // - provide none of these parameters, to use the default material
 
-var utils = require("../Utils/Utils.js");
+var utils = require("../utils/Utils.js");
 var THREE = require("three");
 
 var defaults = {
@@ -19494,7 +19494,7 @@ function material (options) {
 
 module.exports = exports = material;
 
-},{"../Utils/Utils.js":3,".three":21}],24:[function(require,module,exports){
+},{"../utils/Utils.js":3,".three":21}],24:[function(require,module,exports){
 arguments[4][3][0].apply(exports,arguments)
 },{".three":21,"./constants.js":22,"./validate.js":25,"dup":3}],25:[function(require,module,exports){
 arguments[4][5][0].apply(exports,arguments)

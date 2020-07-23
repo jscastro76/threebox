@@ -102,7 +102,7 @@
     <Content Include="src\objects\tube.js" />
     <Content Include="src\utils\constants.js" />
     <Content Include="src\utils\material.js" />
-    <Content Include="src\utils\utils.js" />
+    <Content Include="src\utils\Utils.js" />
     <Content Include="src\utils\validate.js" />
     <Content Include="src\utils\ValueGenerator.js" />
     <Content Include="src\objects\customLines\Line2.js" />

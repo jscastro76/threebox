@@ -1,6 +1,6 @@
 var THREE = require("three");
-var utils = require("../Utils/Utils.js");
-var ThreeboxConstants = require("../Utils/constants.js");
+var utils = require("../utils/Utils.js");
+var ThreeboxConstants = require("../utils/constants.js");
 
 function CameraSync(map, camera, world) {
     this.map = map;

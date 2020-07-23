@@ -1,4 +1,4 @@
-const utils = require("../utils/utils.js");
+const utils = require("../utils/Utils.js");
 const Objects = require('./objects.js');
 const CSS2D = require('./CSS2DRenderer.js');
 

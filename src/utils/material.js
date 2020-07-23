@@ -5,7 +5,7 @@
 // - specify a `material` string, `color`, and/or `opacity` as modifications of the default material
 // - provide none of these parameters, to use the default material
 
-var utils = require("../Utils/Utils.js");
+var utils = require("../utils/Utils.js");
 var THREE = require("three");
 
 var defaults = {
