@@ -1,4 +1,4 @@
-var THREE = require("./three.js");
+var THREE = require("three");
 var CameraSync = require("./camera/CameraSync.js");
 var utils = require("./utils/utils.js");
 var AnimationManager = require("./animation/AnimationManager.js");
@@ -81,11 +81,11 @@ Threebox.prototype = {
 		//this.raycaster.params.Points.threshold = 100;
 
 		if (this.options.defaultLights) this.defaultLights();
-		if (this.options.enableSelectingFeatures) this.enableSelectingFeatures = this.options.enableSelectingFeatures; 
-		if (this.options.enableSelectingObjects) this.enableSelectingObjects = this.options.enableSelectingObjects; 
-		if (this.options.enableDraggingObjects) this.enableDraggingObjects = this.options.enableDraggingObjects; 
-		if (this.options.enableRotatingObjects) this.enableRotatingObjects = this.options.enableRotatingObjects; 
-		if (this.options.enableTooltips) this.enableTooltips = this.options.enableTooltips; 
+		if (this.options.enableSelectingFeatures) this.enableSelectingFeatures = this.options.enableSelectingFeatures;
+		if (this.options.enableSelectingObjects) this.enableSelectingObjects = this.options.enableSelectingObjects;
+		if (this.options.enableDraggingObjects) this.enableDraggingObjects = this.options.enableDraggingObjects;
+		if (this.options.enableRotatingObjects) this.enableRotatingObjects = this.options.enableRotatingObjects;
+		if (this.options.enableTooltips) this.enableTooltips = this.options.enableTooltips;
 
 		//[jscastro] new event map on load
 		this.map.on('load', function () {
@@ -176,7 +176,7 @@ Threebox.prototype = {
 			}
 
 			function addTooltip(f, map) {
-				if (!map.tb.enableTooltips) return; 
+				if (!map.tb.enableTooltips) return;
 				let coordinates = map.tb.getFeatureCenter(f);
 				let t = map.tb.tooltip({
 					text: f.properties.name || f.id || f.type,

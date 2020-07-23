@@ -1,8 +1,8 @@
 var utils = require("../utils/utils.js");
 var material = require("../utils/material.js");
 var Objects = require('./objects.js');
-var THREE = require("../three.js");
 var Object3D = require('./Object3D.js');
+var THREE = require("three");
 
 function tube(obj, world){
 
@@ -38,7 +38,7 @@ tube.prototype = {
 		var plane = new THREE.Mesh( geometry, m );
 		// world.add( plane );
 
-		var geom = new THREE.Geometry(); 
+		var geom = new THREE.Geometry();
 		var lastElbow = false;
 
 
@@ -82,10 +82,10 @@ tube.prototype = {
 				.normalize();
 
 			if (i === 0) midpointToLookAt = forearm;
-			
+
 			else if (i === spine.length - 1) midpointToLookAt = humerus;
 
-						
+
 			// if first point in input line, rotate and translate it to position
 			if (!lastElbow) {
 
@@ -144,9 +144,9 @@ tube.prototype = {
             var l = obj.radius;
             var a = (i+0.5) / count * Math.PI;
 
-            crossSection.vertices.push( 
-            	new THREE.Vector3 ( 
-            		-Math.sin( 2 * a ), 
+            crossSection.vertices.push(
+            	new THREE.Vector3 (
+            		-Math.sin( 2 * a ),
             		Math.cos( 2 * a ),
             		0
             	)
@@ -178,7 +178,7 @@ tube.prototype = {
 					var triangle1 = new THREE.Face3(t1, b1, b2);
 					var triangle2 = new THREE.Face3(t1, b2, t2);
 					geom.faces.push(triangle1, triangle2)
-				}				
+				}
 			}
 		}
 
@@ -200,4 +200,3 @@ tube.prototype = {
 }
 
 module.exports = exports = tube;
-

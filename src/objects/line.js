@@ -1,4 +1,4 @@
-var THREE = require("../three.js");
+var THREE = require("three");
 var utils = require("../utils/utils.js");
 var Objects = require('./objects.js');
 
@@ -23,7 +23,7 @@ function line(obj){
 		dashed: false,
 		opacity: obj.opacity
 	} );
-	
+
 	matLine.resolution.set( window.innerWidth, window.innerHeight );
 	matLine.isMaterial = true;
 	matLine.transparent = true;

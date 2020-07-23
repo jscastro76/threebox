@@ -1,6 +1,6 @@
 var utils = require("../utils/utils.js");
 var material = require("../utils/material.js");
-const THREE = require('../three.js');
+const THREE = require('three');
 
 const AnimationManager = require("../animation/AnimationManager.js");
 const CSS2D = require("./CSS2DRenderer.js");
@@ -54,7 +54,7 @@ Objects.prototype = {
 
 			if (!obj.coordinates) obj.coordinates = [0, 0, 0];
 
-			// Bestow this mesh with animation superpowers and keeps track of its movements in the global animation queue			
+			// Bestow this mesh with animation superpowers and keeps track of its movements in the global animation queue
 			root.animationManager.enroll(obj);
 
 			obj.setCoords = function (lnglat) {
@@ -69,7 +69,7 @@ Objects.prototype = {
 				if (obj.userData.units === 'meters') {
 					var s = utils.projectedUnitsPerMeter(lnglat[1]);
 					if (!s) { s = 1; };
-					s = Number(s.toFixed(7)); //this precision level is to avoid deviations on the size of the same object  
+					s = Number(s.toFixed(7)); //this precision level is to avoid deviations on the size of the same object
 					if (typeof s === 'number') obj.scale.set(s, s, s);
 					else obj.scale.set(s.x, s.y, s.z); 	//initialize the object size and it will rescale the rest
 				}
@@ -210,7 +210,7 @@ Objects.prototype = {
 				}
 			}
 
-			//[jscastro] Set the positional and pivotal anchor automatically from string param  
+			//[jscastro] Set the positional and pivotal anchor automatically from string param
 			obj.setAnchor = function (anchor) {
 				const box = obj.box3();
 				const size = box.getSize(new THREE.Vector3());
@@ -260,7 +260,7 @@ Objects.prototype = {
 				obj.model.position.set(-obj.anchor.x, -obj.anchor.y, -obj.anchor.z);
 
 			}
-			//[jscastro] Set the positional and pivotal anchor based on (x, y, z) size units  
+			//[jscastro] Set the positional and pivotal anchor based on (x, y, z) size units
 			obj.setCenter = function (center) {
 				//[jscastro] if the object options have an adjustment to center the 3D Object different to 0
 				if (center && (center.x != 0 || center.y != 0 || center.z != 0)) {
@@ -324,7 +324,7 @@ Objects.prototype = {
 				}
 			});
 
-			//[jscastro] add CSS2 label method 
+			//[jscastro] add CSS2 label method
 			obj.addLabel = function (HTMLElement, visible = false, center = obj.anchor) {
 				if (HTMLElement) {
 					//we add it to the first children to get same boxing and position
@@ -348,7 +348,7 @@ Objects.prototype = {
 				return obj.label;
 			}
 
-			//[jscastro] add tooltip method 
+			//[jscastro] add tooltip method
 			obj.addTooltip = function (tooltipText, mapboxStyle = false, center = obj.anchor) {
 				if (tooltipText) {
 					let divToolTip = root.drawTooltip(tooltipText, mapboxStyle);
@@ -488,7 +488,7 @@ Objects.prototype = {
 						obj.matrix.extractRotation(rm);
 						rm.getInverse(rmi);
 						dup.setRotationFromMatrix(rmi);
-						//now the object inside will give us a NAABB Non-Axes Aligned Bounding Box 
+						//now the object inside will give us a NAABB Non-Axes Aligned Bounding Box
 						bounds = new THREE.Box3().setFromObject(dup.model);
 					}
 				}
@@ -597,7 +597,7 @@ Objects.prototype = {
 
 	animationManager: new AnimationManager,
 
-	//[jscastro] add tooltip method 
+	//[jscastro] add tooltip method
 	drawTooltip : function (tooltipText, mapboxStyle = false) {
 		if (tooltipText) {
 			let divToolTip;

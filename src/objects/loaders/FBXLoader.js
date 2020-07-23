@@ -1,4 +1,4 @@
-const THREE = require('../../three.js');
+const THREE = require('three');
 const Zlib = require('../Zlib.Inflate.js');
 
 /**

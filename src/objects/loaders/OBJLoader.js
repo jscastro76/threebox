@@ -1,7 +1,7 @@
 /**
  * @author mrdoob / http://mrdoob.com/
  */
-const THREE = require('../../three.js');
+const THREE = require('three');
 
 THREE.OBJLoader = (function () {
 

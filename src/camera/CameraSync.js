@@ -1,4 +1,4 @@
-var THREE = require("../three.js");
+var THREE = require("three");
 var utils = require("../Utils/Utils.js");
 var ThreeboxConstants = require("../Utils/constants.js");
 

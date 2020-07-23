@@ -1,4 +1,4 @@
-const THREE = require('../three.js');
+const THREE = require('three');
 var threebox = require('../Threebox.js');
 var utils = require("../utils/utils.js");
 var validate = require("../utils/validate.js");
@@ -6,7 +6,7 @@ var validate = require("../utils/validate.js");
 function AnimationManager(map) {
 
     this.map = map
-    this.enrolledObjects = [];    
+    this.enrolledObjects = [];
     this.previousFrameTime;
 
 };
@@ -151,7 +151,7 @@ AnimationManager.prototype = {
 				obj.isPlaying = false;
 				cancelAnimationFrame(obj.animationMethod);
 			}
-			//TODO: if this is removed, it produces an error in 
+			//TODO: if this is removed, it produces an error in
 			this.animationQueue = [];
 			return this;
 		}
@@ -187,7 +187,7 @@ AnimationManager.prototype = {
 
 			var p = options.position; // lnglat
 			var r = options.rotation; // radians
-			var s = options.scale; // 
+			var s = options.scale; //
 			var w = options.worldCoordinates; //Vector3
 			var q = options.quaternion; // [axis, angle in rads]
 			var t = options.translate; //[jscastro] lnglat + height for 3D objects

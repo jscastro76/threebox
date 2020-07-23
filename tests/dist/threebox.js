@@ -3,7 +3,7 @@ window.Threebox = require('./src/Threebox.js'),
 window.THREE = require('./src/three.js')
 
 },{"./src/Threebox.js":2,"./src/three.js":21}],2:[function(require,module,exports){
-var THREE = require("./three.js");
+var THREE = require("three");
 var CameraSync = require("./camera/CameraSync.js");
 var utils = require("./utils/utils.js");
 var AnimationManager = require("./animation/AnimationManager.js");
@@ -551,8 +551,8 @@ var defaultOptions = {
 module.exports = exports = Threebox;
 
 
-},{"./animation/AnimationManager.js":6,"./camera/CameraSync.js":7,"./objects/CSS2DRenderer.js":8,"./objects/Object3D.js":9,"./objects/line.js":11,"./objects/loadObj.js":12,"./objects/objects.js":18,"./objects/sphere.js":19,"./objects/tube.js":20,"./three.js":21,"./utils/constants.js":22,"./utils/material.js":23,"./utils/utils.js":24}],3:[function(require,module,exports){
-var THREE = require("../three.js");
+},{"./animation/AnimationManager.js":6,"./camera/CameraSync.js":7,"./objects/CSS2DRenderer.js":8,"./objects/Object3D.js":9,"./objects/line.js":11,"./objects/loadObj.js":12,"./objects/objects.js":18,"./objects/sphere.js":19,"./objects/tube.js":20,"three":21,"./utils/constants.js":22,"./utils/material.js":23,"./utils/utils.js":24}],3:[function(require,module,exports){
+var THREE = require("three");
 var Constants = require("./constants.js");
 var validate = require("./validate.js");
 
@@ -832,7 +832,7 @@ var utils = {
 }
 
 module.exports = exports = utils
-},{"../three.js":21,"./constants.js":4,"./validate.js":5}],4:[function(require,module,exports){
+},{".three":21,"./constants.js":4,"./validate.js":5}],4:[function(require,module,exports){
 const WORLD_SIZE = 1024000;
 const MERCATOR_A = 6378137.0;
 
@@ -864,7 +864,7 @@ Validate.prototype = {
             console.error("Coords length must be at least 2")
             return
         }
-    
+
         for (member of input) {
             if (member.constructor !== Number) {
                 console.error("Coords values must be numbers")
@@ -874,7 +874,7 @@ Validate.prototype = {
 
         if (Math.abs(input[1]) > 90) {
             console.error("Latitude must be between -90 and 90")
-            return                    
+            return
         }
 
         return input
@@ -892,7 +892,7 @@ Validate.prototype = {
         for (coord of input){
             if (!scope.Coords(coord)) {
                 console.error("Each coordinate in a line must be a valid Coords type")
-                return                    
+                return
             }
 
         }
@@ -910,7 +910,7 @@ Validate.prototype = {
 
                 if (!['x', 'y', 'z'].includes(key)) {
                     console.error('Rotation parameters must be x, y, or z')
-                    return                            
+                    return
                 }
                 if (input[key].constructor !== Number) {
                     console.error('Individual rotation values must be numbers')
@@ -932,14 +932,14 @@ Validate.prototype = {
         if (input.constructor === Number) {
             input = {x:input, y:input, z: input}
         }
-        
+
         else if (input.constructor === Object) {
 
             for (key of Object.keys(input)){
 
                 if (!['x', 'y', 'z'].includes(key)) {
                     console.error('Scale parameters must be x, y, or z')
-                    return                            
+                    return
                 }
                 if (input[key].constructor !== Number) {
                     console.error('Individual scale values must be numbers')
@@ -961,7 +961,7 @@ Validate.prototype = {
 
 module.exports = exports = Validate;
 },{}],6:[function(require,module,exports){
-const THREE = require('../three.js');
+const THREE = require('three');
 var threebox = require('../Threebox.js');
 var utils = require("../utils/utils.js");
 var validate = require("../utils/validate.js");
@@ -969,7 +969,7 @@ var validate = require("../utils/validate.js");
 function AnimationManager(map) {
 
     this.map = map
-    this.enrolledObjects = [];    
+    this.enrolledObjects = [];
     this.previousFrameTime;
 
 };
@@ -1143,7 +1143,7 @@ AnimationManager.prototype = {
 
 			var p = options.position; // lnglat
 			var r = options.rotation; // radians
-			var s = options.scale; // 
+			var s = options.scale; //
 			var w = options.worldCoordinates; //Vector3
 			var q = options.quaternion; // [axis, angle]
 			var t = options.translate; //[jscastro] lnglat + height for 3D objects
@@ -1386,8 +1386,8 @@ const defaults = {
     }
 }
 module.exports = exports = AnimationManager;
-},{"../Threebox.js":2,"../three.js":21,"../utils/utils.js":24,"../utils/validate.js":25}],7:[function(require,module,exports){
-var THREE = require("../three.js");
+},{"../Threebox.js":2,".three":21,"../utils/utils.js":24,"../utils/validate.js":25}],7:[function(require,module,exports){
+var THREE = require("three");
 var utils = require("../utils/utils.js");
 var ThreeboxConstants = require("../utils/constants.js");
 
@@ -1515,12 +1515,12 @@ CameraSync.prototype = {
 
 module.exports = exports = CameraSync;
 
-},{"../three.js":21,"../utils/constants.js":22,"../utils/utils.js":24}],8:[function(require,module,exports){
+},{".three":21,"../utils/constants.js":22,"../utils/utils.js":24}],8:[function(require,module,exports){
 /**
  * @author mrdoob / http://mrdoob.com/
  */
 
-const THREE = require('../three.js');
+const THREE = require('three');
 THREE.CSS2DObject = function (element) {
 
 	THREE.Object3D.call(this);
@@ -1580,7 +1580,7 @@ THREE.CSS2DRenderer = function () {
 			//TODO: Implement a good state reset, check out what is made in WebGlRenderer
 			//domElement.innerHTML = '';
 		}
-	} 
+	}
 
 	this.getSize = function () {
 
@@ -1716,7 +1716,7 @@ THREE.CSS2DRenderer = function () {
 module.exports = exports = { CSS2DRenderer: THREE.CSS2DRenderer, CSS2DObject: THREE.CSS2DObject };
 
 
-},{"../three.js":21}],9:[function(require,module,exports){
+},{".three":21}],9:[function(require,module,exports){
 var Objects = require('./objects.js');
 var utils = require("../utils/utils.js");
 
@@ -1766,7 +1766,7 @@ var Zlib = mod.Zlib;
 module.exports = exports = Zlib;
 
 },{}],11:[function(require,module,exports){
-var THREE = require("../three.js");
+var THREE = require("three");
 var utils = require("../utils/utils.js");
 var Objects = require('./objects.js');
 
@@ -1791,7 +1791,7 @@ function line(obj){
 		dashed: false,
 		opacity: obj.opacity
 	} );
-	
+
 	matLine.resolution.set( window.innerWidth, window.innerHeight );
 	matLine.isMaterial = true;
 	matLine.transparent = true;
@@ -2760,7 +2760,7 @@ THREE.Wireframe.prototype = Object.assign( Object.create( THREE.Mesh.prototype )
 
 } );
 
-},{"../three.js":21,"../utils/utils.js":24,"./objects.js":18}],12:[function(require,module,exports){
+},{".three":21,"../utils/utils.js":24,"./objects.js":18}],12:[function(require,module,exports){
 var utils = require("../utils/utils.js");
 var Objects = require('./objects.js');
 const OBJLoader = require("./loaders/OBJLoader.js");
@@ -2937,7 +2937,7 @@ module.exports = exports = loadObj;
  * @author Mugen87 / https://github.com/Mugen87
  */
 
-const THREE = require('../../three.js');
+const THREE = require('three');
 
 THREE.ColladaLoader = function (manager) {
 
@@ -6886,7 +6886,7 @@ THREE.ColladaLoader.prototype = Object.assign(Object.create(THREE.Loader.prototy
 
 module.exports = exports = THREE.ColladaLoader;
 
-},{"../../three.js":21}],14:[function(require,module,exports){
+},{"three":21}],14:[function(require,module,exports){
 /**
  * @author Kyle-Larson https://github.com/Kyle-Larson
  * @author Takahiro https://github.com/takahirox
@@ -6906,7 +6906,7 @@ module.exports = exports = THREE.ColladaLoader;
  * 	Binary format specification:
  *		https://code.blender.org/2013/08/fbx-binary-file-format-specification/
  */
-const THREE = require('../../three.js');
+const THREE = require('three');
 const Zlib = require('../Zlib.Inflate.js');
 
 
@@ -11004,7 +11004,7 @@ THREE.FBXLoader = (function () {
 
 module.exports = exports = THREE.FBXLoader;
 
-},{"../../three.js":21,"../Zlib.Inflate.js":10}],15:[function(require,module,exports){
+},{"three":21,"../Zlib.Inflate.js":10}],15:[function(require,module,exports){
 /**
  * @author Rich Tibbett / https://github.com/richtr
  * @author mrdoob / http://mrdoob.com/
@@ -11012,7 +11012,7 @@ module.exports = exports = THREE.FBXLoader;
  * @author Takahiro / https://github.com/takahirox
  * @author Don McCurdy / https://www.donmccurdy.com
  */
-const THREE = require('../../three.js');
+const THREE = require('three');
 
 THREE.GLTFLoader = (function () {
 
@@ -14287,14 +14287,14 @@ THREE.GLTFLoader = (function () {
 })();
 
 module.exports = exports = THREE.GLTFLoader;
-},{"../../three.js":21}],16:[function(require,module,exports){
+},{"three":21}],16:[function(require,module,exports){
 /**
  * Loads a Wavefront .mtl file specifying materials
  *
  * @author angelxuanchang
  */
 
-const THREE = require('../../three.js');
+const THREE = require('three');
 
 const MTLLoader = function ( manager ) {
 
@@ -14831,11 +14831,11 @@ MTLLoader.MaterialCreator.prototype = {
 };
 
 module.exports = exports = MTLLoader;
-},{"../../three.js":21}],17:[function(require,module,exports){
+},{"three":21}],17:[function(require,module,exports){
 /**
  * @author mrdoob / http://mrdoob.com/
  */
-const THREE = require('../../three.js');
+const THREE = require('three');
 
 const OBJLoader = function ( manager ) {
 
@@ -15579,10 +15579,10 @@ OBJLoader.prototype = {
 };
 
 module.exports = exports = OBJLoader;
-},{"../../three.js":21}],18:[function(require,module,exports){
+},{"three":21}],18:[function(require,module,exports){
 var utils = require("../utils/utils.js");
 var material = require("../utils/material.js");
-const THREE = require('../three.js');
+const THREE = require('three');
 
 const AnimationManager = require("../animation/AnimationManager.js");
 const CSS2D = require("./CSS2DRenderer.js");
@@ -15636,7 +15636,7 @@ Objects.prototype = {
 
 			if (!obj.coordinates) obj.coordinates = [0, 0, 0];
 
-			// Bestow this mesh with animation superpowers and keeps track of its movements in the global animation queue			
+			// Bestow this mesh with animation superpowers and keeps track of its movements in the global animation queue
 			root.animationManager.enroll(obj);
 
 			obj.setCoords = function (lnglat) {
@@ -15786,7 +15786,7 @@ Objects.prototype = {
 				}
 			})
 
-			//[jscastro] add CSS2 label method 
+			//[jscastro] add CSS2 label method
 			obj.addLabel = function (HTMLElement, visible, bottomMargin) {
 				if (HTMLElement) {
 					//we add it to the first children to get same boxing and position
@@ -16081,7 +16081,7 @@ Objects.prototype = {
 }
 
 module.exports = exports = Objects;
-},{"../animation/AnimationManager.js":6,"../three.js":21,"../utils/material.js":23,"../utils/utils.js":24,"./CSS2DRenderer.js":8}],19:[function(require,module,exports){
+},{"../animation/AnimationManager.js":6,".three":21,"../utils/material.js":23,"../utils/utils.js":24,"./CSS2DRenderer.js":8}],19:[function(require,module,exports){
 var utils = require("../utils/utils.js");
 var material = require("../utils/material.js");
 var Objects = require('./objects.js');
@@ -16104,7 +16104,7 @@ module.exports = exports = Sphere;
 var utils = require("../utils/utils.js");
 var material = require("../utils/material.js");
 var Objects = require('./objects.js');
-var THREE = require("../three.js");
+var THREE = require("three");
 
 function tube(obj, world){
 
@@ -16137,7 +16137,7 @@ tube.prototype = {
 		var plane = new THREE.Mesh( geometry, m );
 		// world.add( plane );
 
-		var geom = new THREE.Geometry(); 
+		var geom = new THREE.Geometry();
 		var lastElbow = false;
 
 
@@ -16181,10 +16181,10 @@ tube.prototype = {
 				.normalize();
 
 			if (i === 0) midpointToLookAt = forearm;
-			
+
 			else if (i === spine.length - 1) midpointToLookAt = humerus;
 
-						
+
 			// if first point in input line, rotate and translate it to position
 			if (!lastElbow) {
 
@@ -16243,9 +16243,9 @@ tube.prototype = {
             var l = obj.radius;
             var a = (i+0.5) / count * Math.PI;
 
-            crossSection.vertices.push( 
-            	new THREE.Vector3 ( 
-            		-Math.sin( 2 * a ), 
+            crossSection.vertices.push(
+            	new THREE.Vector3 (
+            		-Math.sin( 2 * a ),
             		Math.cos( 2 * a ),
             		0
             	)
@@ -16277,7 +16277,7 @@ tube.prototype = {
 					var triangle1 = new THREE.Face3(t1, b1, b2);
 					var triangle2 = new THREE.Face3(t1, b2, t2);
 					geom.faces.push(triangle1, triangle2)
-				}				
+				}
 			}
 		}
 
@@ -16301,7 +16301,7 @@ tube.prototype = {
 module.exports = exports = tube;
 
 
-},{"../three.js":21,"../utils/material.js":23,"../utils/utils.js":24,"./objects.js":18}],21:[function(require,module,exports){
+},{".three":21,"../utils/material.js":23,"../utils/utils.js":24,"./objects.js":18}],21:[function(require,module,exports){
 // threejs.org/license
 (function (k, ua) { "object" === typeof exports && "undefined" !== typeof module ? ua(exports) : "function" === typeof define && define.amd ? define(["exports"], ua) : (k = k || self, ua(k.THREE = {})) })(this, function (k) {
 	function ua() { } function u(a, b) { this.x = a || 0; this.y = b || 0 } function xa() { this.elements = [1, 0, 0, 0, 1, 0, 0, 0, 1]; 0 < arguments.length && console.error("THREE.Matrix3: the constructor no longer reads arguments. use .set() instead.") } function V(a, b, c, d, e, f, g, h, l, m) {
@@ -19450,7 +19450,7 @@ arguments[4][4][0].apply(exports,arguments)
 // - provide none of these parameters, to use the default material
 
 var utils = require("../Utils/Utils.js");
-var THREE = require("../three.js");
+var THREE = require("three");
 
 var defaults = {
 	material: 'MeshBasicMaterial',
@@ -19494,8 +19494,8 @@ function material (options) {
 
 module.exports = exports = material;
 
-},{"../Utils/Utils.js":3,"../three.js":21}],24:[function(require,module,exports){
+},{"../Utils/Utils.js":3,".three":21}],24:[function(require,module,exports){
 arguments[4][3][0].apply(exports,arguments)
-},{"../three.js":21,"./constants.js":22,"./validate.js":25,"dup":3}],25:[function(require,module,exports){
+},{".three":21,"./constants.js":22,"./validate.js":25,"dup":3}],25:[function(require,module,exports){
 arguments[4][5][0].apply(exports,arguments)
 },{"dup":5}]},{},[1]);
