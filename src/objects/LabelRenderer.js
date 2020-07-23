@@ -4,7 +4,7 @@
 
 var THREE = require("./CSS2DRenderer.js");
 
-LabelRenderer = function (map) {
+function LabelRenderer(map) {
 
 	this.map = map;
 
