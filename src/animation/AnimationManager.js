@@ -1,6 +1,6 @@
 const THREE = require('three');
 var threebox = require('../Threebox.js');
-var utils = require("../utils/utils.js");
+var utils = require("../utils/Utils.js");
 var validate = require("../utils/validate.js");
 
 function AnimationManager(map) {

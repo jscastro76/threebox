@@ -1,6 +1,6 @@
 var THREE = require("three");
 var CameraSync = require("./camera/CameraSync.js");
-var utils = require("./utils/utils.js");
+var utils = require("./utils/Utils.js");
 var AnimationManager = require("./animation/AnimationManager.js");
 var ThreeboxConstants = require("./utils/constants.js");
 

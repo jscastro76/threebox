@@ -1,4 +1,4 @@
-var utils = require("../utils/utils.js");
+var utils = require("../utils/Utils.js");
 var Objects = require('./objects.js');
 const OBJLoader = require("./loaders/OBJLoader.js");
 const MTLLoader = require("./loaders/MTLLoader.js");

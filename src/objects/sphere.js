@@ -1,4 +1,4 @@
-var utils = require("../utils/utils.js");
+var utils = require("../utils/Utils.js");
 var material = require("../utils/material.js");
 var Objects = require('./objects.js');
 var Object3D = require('./Object3D.js');

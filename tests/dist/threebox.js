@@ -5,7 +5,7 @@ window.THREE = require('./src/three.js')
 },{"./src/Threebox.js":2,"./src/three.js":21}],2:[function(require,module,exports){
 var THREE = require("three");
 var CameraSync = require("./camera/CameraSync.js");
-var utils = require("./utils/utils.js");
+var utils = require("./utils/Utils.js");
 var AnimationManager = require("./animation/AnimationManager.js");
 var ThreeboxConstants = require("./utils/constants.js");
 
@@ -551,7 +551,7 @@ var defaultOptions = {
 module.exports = exports = Threebox;
 
 
-},{"./animation/AnimationManager.js":6,"./camera/CameraSync.js":7,"./objects/CSS2DRenderer.js":8,"./objects/Object3D.js":9,"./objects/line.js":11,"./objects/loadObj.js":12,"./objects/objects.js":18,"./objects/sphere.js":19,"./objects/tube.js":20,"three":21,"./utils/constants.js":22,"./utils/material.js":23,"./utils/utils.js":24}],3:[function(require,module,exports){
+},{"./animation/AnimationManager.js":6,"./camera/CameraSync.js":7,"./objects/CSS2DRenderer.js":8,"./objects/Object3D.js":9,"./objects/line.js":11,"./objects/loadObj.js":12,"./objects/objects.js":18,"./objects/sphere.js":19,"./objects/tube.js":20,"three":21,"./utils/constants.js":22,"./utils/material.js":23,"./utils/Utils.js":24}],3:[function(require,module,exports){
 var THREE = require("three");
 var Constants = require("./constants.js");
 var validate = require("./validate.js");
@@ -963,7 +963,7 @@ module.exports = exports = Validate;
 },{}],6:[function(require,module,exports){
 const THREE = require('three');
 var threebox = require('../Threebox.js');
-var utils = require("../utils/utils.js");
+var utils = require("../utils/Utils.js");
 var validate = require("../utils/validate.js");
 
 function AnimationManager(map) {
@@ -1386,9 +1386,9 @@ const defaults = {
     }
 }
 module.exports = exports = AnimationManager;
-},{"../Threebox.js":2,".three":21,"../utils/utils.js":24,"../utils/validate.js":25}],7:[function(require,module,exports){
+},{"../Threebox.js":2,".three":21,"../utils/Utils.js":24,"../utils/validate.js":25}],7:[function(require,module,exports){
 var THREE = require("three");
-var utils = require("../utils/utils.js");
+var utils = require("../utils/Utils.js");
 var ThreeboxConstants = require("../utils/constants.js");
 
 function CameraSync(map, camera, world) {
@@ -1515,7 +1515,7 @@ CameraSync.prototype = {
 
 module.exports = exports = CameraSync;
 
-},{".three":21,"../utils/constants.js":22,"../utils/utils.js":24}],8:[function(require,module,exports){
+},{".three":21,"../utils/constants.js":22,"../utils/Utils.js":24}],8:[function(require,module,exports){
 /**
  * @author mrdoob / http://mrdoob.com/
  */
@@ -1718,7 +1718,7 @@ module.exports = exports = { CSS2DRenderer: THREE.CSS2DRenderer, CSS2DObject: TH
 
 },{".three":21}],9:[function(require,module,exports){
 var Objects = require('./objects.js');
-var utils = require("../utils/utils.js");
+var utils = require("../utils/Utils.js");
 
 function Object3D(options) {
 	options = utils._validate(options,  Objects.prototype._defaults.Object3D);
@@ -1733,7 +1733,7 @@ function Object3D(options) {
 
 
 module.exports = exports = Object3D;
-},{"../utils/utils.js":24,"./objects.js":18}],10:[function(require,module,exports){
+},{"../utils/Utils.js":24,"./objects.js":18}],10:[function(require,module,exports){
 /** @license zlib.js 2012 - imaya [ https://github.com/imaya/zlib.js ] The MIT License */var mod = {}, l = void 0, aa = mod; function r(c, d) { var a = c.split("."), b = aa; !(a[0] in b) && b.execScript && b.execScript("var " + a[0]); for (var e; a.length && (e = a.shift());)!a.length && d !== l ? b[e] = d : b = b[e] ? b[e] : b[e] = {} }; var t = "undefined" !== typeof Uint8Array && "undefined" !== typeof Uint16Array && "undefined" !== typeof Uint32Array && "undefined" !== typeof DataView; function v(c) { var d = c.length, a = 0, b = Number.POSITIVE_INFINITY, e, f, g, h, k, m, n, p, s, x; for (p = 0; p < d; ++p)c[p] > a && (a = c[p]), c[p] < b && (b = c[p]); e = 1 << a; f = new (t ? Uint32Array : Array)(e); g = 1; h = 0; for (k = 2; g <= a;) { for (p = 0; p < d; ++p)if (c[p] === g) { m = 0; n = h; for (s = 0; s < g; ++s)m = m << 1 | n & 1, n >>= 1; x = g << 16 | p; for (s = m; s < e; s += k)f[s] = x; ++h } ++g; h <<= 1; k <<= 1 } return [f, a, b] }; function w(c, d) {
 this.g = []; this.h = 32768; this.d = this.f = this.a = this.l = 0; this.input = t ? new Uint8Array(c) : c; this.m = !1; this.i = y; this.r = !1; if (d || !(d = {})) d.index && (this.a = d.index), d.bufferSize && (this.h = d.bufferSize), d.bufferType && (this.i = d.bufferType), d.resize && (this.r = d.resize); switch (this.i) {
 	case A: this.b = 32768; this.c = new (t ? Uint8Array : Array)(32768 + this.h + 258); break; case y: this.b = 0; this.c = new (t ? Uint8Array : Array)(this.h); this.e = this.z; this.n = this.v; this.j = this.w; break; default: throw Error("invalid inflate mode");
@@ -1767,7 +1767,7 @@ module.exports = exports = Zlib;
 
 },{}],11:[function(require,module,exports){
 var THREE = require("three");
-var utils = require("../utils/utils.js");
+var utils = require("../utils/Utils.js");
 var Objects = require('./objects.js');
 
 function line(obj){
@@ -2760,8 +2760,8 @@ THREE.Wireframe.prototype = Object.assign( Object.create( THREE.Mesh.prototype )
 
 } );
 
-},{".three":21,"../utils/utils.js":24,"./objects.js":18}],12:[function(require,module,exports){
-var utils = require("../utils/utils.js");
+},{".three":21,"../utils/Utils.js":24,"./objects.js":18}],12:[function(require,module,exports){
+var utils = require("../utils/Utils.js");
 var Objects = require('./objects.js');
 const OBJLoader = require("./loaders/OBJLoader.js");
 const MTLLoader = require("./loaders/MTLLoader.js");
@@ -2931,7 +2931,7 @@ function loadObj(options, cb) {
 
 
 module.exports = exports = loadObj;
-},{"../utils/utils.js":24,"./loaders/ColladaLoader.js":13,"./loaders/FBXLoader.js":14,"./loaders/GLTFLoader.js":15,"./loaders/MTLLoader.js":16,"./loaders/OBJLoader.js":17,"./objects.js":18}],13:[function(require,module,exports){
+},{"../utils/Utils.js":24,"./loaders/ColladaLoader.js":13,"./loaders/FBXLoader.js":14,"./loaders/GLTFLoader.js":15,"./loaders/MTLLoader.js":16,"./loaders/OBJLoader.js":17,"./objects.js":18}],13:[function(require,module,exports){
 /**
  * @author mrdoob / http://mrdoob.com/
  * @author Mugen87 / https://github.com/Mugen87
@@ -15580,7 +15580,7 @@ OBJLoader.prototype = {
 
 module.exports = exports = OBJLoader;
 },{"three":21}],18:[function(require,module,exports){
-var utils = require("../utils/utils.js");
+var utils = require("../utils/Utils.js");
 var material = require("../utils/material.js");
 const THREE = require('three');
 
@@ -16081,8 +16081,8 @@ Objects.prototype = {
 }
 
 module.exports = exports = Objects;
-},{"../animation/AnimationManager.js":6,".three":21,"../utils/material.js":23,"../utils/utils.js":24,"./CSS2DRenderer.js":8}],19:[function(require,module,exports){
-var utils = require("../utils/utils.js");
+},{"../animation/AnimationManager.js":6,".three":21,"../utils/material.js":23,"../utils/Utils.js":24,"./CSS2DRenderer.js":8}],19:[function(require,module,exports){
+var utils = require("../utils/Utils.js");
 var material = require("../utils/material.js");
 var Objects = require('./objects.js');
 
@@ -16100,8 +16100,8 @@ function Sphere(obj){
 
 
 module.exports = exports = Sphere;
-},{"../utils/material.js":23,"../utils/utils.js":24,"./objects.js":18}],20:[function(require,module,exports){
-var utils = require("../utils/utils.js");
+},{"../utils/material.js":23,"../utils/Utils.js":24,"./objects.js":18}],20:[function(require,module,exports){
+var utils = require("../utils/Utils.js");
 var material = require("../utils/material.js");
 var Objects = require('./objects.js');
 var THREE = require("three");
@@ -16301,7 +16301,7 @@ tube.prototype = {
 module.exports = exports = tube;
 
 
-},{".three":21,"../utils/material.js":23,"../utils/utils.js":24,"./objects.js":18}],21:[function(require,module,exports){
+},{".three":21,"../utils/material.js":23,"../utils/Utils.js":24,"./objects.js":18}],21:[function(require,module,exports){
 // threejs.org/license
 (function (k, ua) { "object" === typeof exports && "undefined" !== typeof module ? ua(exports) : "function" === typeof define && define.amd ? define(["exports"], ua) : (k = k || self, ua(k.THREE = {})) })(this, function (k) {
 	function ua() { } function u(a, b) { this.x = a || 0; this.y = b || 0 } function xa() { this.elements = [1, 0, 0, 0, 1, 0, 0, 0, 1]; 0 < arguments.length && console.error("THREE.Matrix3: the constructor no longer reads arguments. use .set() instead.") } function V(a, b, c, d, e, f, g, h, l, m) {

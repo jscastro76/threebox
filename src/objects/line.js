@@ -1,5 +1,5 @@
 var THREE = require("three");
-var utils = require("../utils/utils.js");
+var utils = require("../utils/Utils.js");
 var Objects = require('./objects.js');
 
 function line(obj){

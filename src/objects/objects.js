@@ -1,4 +1,4 @@
-var utils = require("../utils/utils.js");
+var utils = require("../utils/Utils.js");
 var material = require("../utils/material.js");
 const THREE = require('three');
 

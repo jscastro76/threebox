@@ -1,5 +1,5 @@
 var Objects = require('./objects.js');
-var utils = require("../utils/utils.js");
+var utils = require("../utils/Utils.js");
 
 function Object3D(options) {
 	options = utils._validate(options, Objects.prototype._defaults.Object3D);
