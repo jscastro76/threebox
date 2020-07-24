@@ -4,8 +4,6 @@
     <script src="threebox-tests-bundle.js" type="text/javascript"></script>
     <script src="../examples/config.js"></script>
     <script src='../dist/threebox.js'></script>
-    <script src='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
 
     <script src='unit/material.test.js'></script>
     <script src='unit/utilities.test.js'></script>
@@ -13,12 +11,12 @@
     <script src='unit/validate.test.js'></script>
 
     <style>
-        body, html { 
+        body, html {
             width: 100%;
             height: 100%;
             margin: 0;
         }
-        #map { 
+        #map {
             width: 100%;
             height: 100%;
         }
@@ -30,7 +28,7 @@
 
     <script>
         if(!config) console.error("Config not set! Make a copy of 'config_template.js', add in your access token, and save the file as 'config.js'.");
-        
+
         mapboxgl.accessToken = config.accessToken;
         var map = new mapboxgl.Map({
           container: 'map',
@@ -58,7 +56,6 @@
         function onAdd(map, mbxContext) {
 
             tb = new Threebox(map, mbxContext);
-            tb.setupDefaultLights();
 
             materialTest(tb);
             objectTest(tb);
@@ -75,7 +72,7 @@
             dX = Math.abs(input.x - expected.x) / (expected.x === 0 ? 1 : expected.x);
             dY = Math.abs(input.y - expected.y) / (expected.y === 0 ? 1 : expected.y);
             dZ = Math.abs(input.z - expected.z) / (expected.z === 0 ? 1 : expected.z);
-            
+
             if (dX < epsilon) dX = 0;
             if (dY < epsilon) dY = 0;
             if (dZ < epsilon) dZ = 0;

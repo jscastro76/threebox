@@ -25,7 +25,7 @@
 	<script>
 
 		if(!config) console.error("Config not set! Make a copy of 'config_template.js', add in your access token, and save the file as 'config.js'.");
-		
+
 		mapboxgl.accessToken = config.accessToken;
 
 		//starting location for both map and eventual sphere
@@ -48,7 +48,7 @@
 				onAdd: function(map, mbxContext){
 
 					tb = new Threebox(
-						map, 
+						map,
 						mbxContext,
 						{defaultLights: true}
 					);
@@ -61,7 +61,7 @@
 					tb.add(sphere);
 
 				},
-				
+
 				render: function(gl, matrix){
 					tb.update();
 				}
