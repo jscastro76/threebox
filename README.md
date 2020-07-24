@@ -17,7 +17,7 @@ Current release is [**2.0.4**](https://github.com/jscastro76/threebox/releases/t
 
 ## ONLY in this Threebox fork
 
-|Models built-in & custom animations |MouseOver/Mouseout, Selected, Drag&Drop, Drag&Rotate, Wireframe 
+|Models built-in & custom animations |MouseOver/Mouseout, Selected, Drag&Drop, Drag&Rotate, Wireframe
 |---------|-----------------------
 |<img alt="threebox" src="./docs/AnimationVideo.gif" width="100%">|<img alt="threebox" src="./docs/Wireframes.gif" width="100%" >
 
@@ -40,7 +40,7 @@ Only in this fork, there is a list of new features implemented on top of the ama
 - Support for GeoJson standard features format import and export in different layers.
 - Support for Objects3D embedded animations, and combined animations on AnimationManager (i.e. translate + embedded).
 - Support for multi-floor design of spaces.
-- Support for Non-AABB Non Axes Aligned Bounding Box and real model size. 
+- Support for Non-AABB Non Axes Aligned Bounding Box and real model size.
 - Support for wireframing on Objects3D, removing them from the raycast.
 - Support for setLayerZoomRange and setLayoutProperty on Custom Layers (not available in Mapbox).
 - Support for full dispose of Mapbox, Three and Threebox resources.
@@ -69,7 +69,8 @@ All the [**Threebox Documentation**](/docs/Threebox.md) has been completely upda
 ## Compatibility/Dependencies
 
 - Mapbox v.0.50.0 and later (for custom layer support)
-- Three.r117 (already bundled into the Threebox build). If desired, other versions can be swapped in and rebuilt [here](https://github.com/jscastro76/threebox/blob/master/src/three.js), though compatibility is not guaranteed. **(WARNING: v118.3 breaks compatibility in some cases)**
+- Three.r117 If desired, other versions can be swapped in, though compatibility is not guaranteed. **(WARNING: v118.3 breaks compatibility in some cases)**
+
 
 
 <br>
@@ -89,12 +90,12 @@ Several introductory examples are [here](https://github.com/jscastro76/threebox/
 
 ## Contributing
 
-Build the library with `npm run build`, or `npm run dev` to rebuild continuously as you develop. 
+Build the library with `npm run build`, or `npm run dev` to rebuild continuously as you develop.
 Both commands will output a bundle in `/dist/threebox.js`.
 
 ### Sample to build the project in Visual Studio
 Sample to get a full build from scratch for Visual Studio:
-- Install [Node.js](https://nodejs.org/en/) 
+- Install [Node.js](https://nodejs.org/en/)
 - Clone the repo and open a new Project using main.js
 - Update the packages @turf, tape, uglyfy, watchify
 - Right click on the project at the Solution Explorer > Open Node.js Interactive Window:
@@ -106,5 +107,3 @@ Sample to get a full build from scratch for Visual Studio:
 `
 
 Tests live [here](/tests) -- run `threebox-tests.html` and check the console for test results.
-
-
