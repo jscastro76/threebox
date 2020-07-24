@@ -832,7 +832,7 @@ var utils = {
 }
 
 module.exports = exports = utils
-},{".three":21,"./constants.js":4,"./validate.js":5}],4:[function(require,module,exports){
+},{"three":21,"./constants.js":4,"./validate.js":5}],4:[function(require,module,exports){
 const WORLD_SIZE = 1024000;
 const MERCATOR_A = 6378137.0;
 
@@ -1386,7 +1386,7 @@ const defaults = {
     }
 }
 module.exports = exports = AnimationManager;
-},{"../Threebox.js":2,".three":21,"../utils/Utils.js":24,"../utils/validate.js":25}],7:[function(require,module,exports){
+},{"../Threebox.js":2,"three":21,"../utils/Utils.js":24,"../utils/validate.js":25}],7:[function(require,module,exports){
 var THREE = require("three");
 var utils = require("../utils/Utils.js");
 var ThreeboxConstants = require("../utils/constants.js");
@@ -1515,7 +1515,7 @@ CameraSync.prototype = {
 
 module.exports = exports = CameraSync;
 
-},{".three":21,"../utils/constants.js":22,"../utils/Utils.js":24}],8:[function(require,module,exports){
+},{"three":21,"../utils/constants.js":22,"../utils/Utils.js":24}],8:[function(require,module,exports){
 /**
  * @author mrdoob / http://mrdoob.com/
  */
@@ -1716,7 +1716,7 @@ THREE.CSS2DRenderer = function () {
 module.exports = exports = { CSS2DRenderer: THREE.CSS2DRenderer, CSS2DObject: THREE.CSS2DObject };
 
 
-},{".three":21}],9:[function(require,module,exports){
+},{"three":21}],9:[function(require,module,exports){
 var Objects = require('./objects.js');
 var utils = require("../utils/Utils.js");
 
@@ -2760,7 +2760,7 @@ THREE.Wireframe.prototype = Object.assign( Object.create( THREE.Mesh.prototype )
 
 } );
 
-},{".three":21,"../utils/Utils.js":24,"./objects.js":18}],12:[function(require,module,exports){
+},{"three":21,"../utils/Utils.js":24,"./objects.js":18}],12:[function(require,module,exports){
 var utils = require("../utils/Utils.js");
 var Objects = require('./objects.js');
 const OBJLoader = require("./loaders/OBJLoader.js");
@@ -16081,7 +16081,7 @@ Objects.prototype = {
 }
 
 module.exports = exports = Objects;
-},{"../animation/AnimationManager.js":6,".three":21,"../utils/material.js":23,"../utils/Utils.js":24,"./CSS2DRenderer.js":8}],19:[function(require,module,exports){
+},{"../animation/AnimationManager.js":6,"three":21,"../utils/material.js":23,"../utils/Utils.js":24,"./CSS2DRenderer.js":8}],19:[function(require,module,exports){
 var utils = require("../utils/Utils.js");
 var material = require("../utils/material.js");
 var Objects = require('./objects.js');
@@ -16301,7 +16301,7 @@ tube.prototype = {
 module.exports = exports = tube;
 
 
-},{".three":21,"../utils/material.js":23,"../utils/Utils.js":24,"./objects.js":18}],21:[function(require,module,exports){
+},{"three":21,"../utils/material.js":23,"../utils/Utils.js":24,"./objects.js":18}],21:[function(require,module,exports){
 // threejs.org/license
 (function (k, ua) { "object" === typeof exports && "undefined" !== typeof module ? ua(exports) : "function" === typeof define && define.amd ? define(["exports"], ua) : (k = k || self, ua(k.THREE = {})) })(this, function (k) {
 	function ua() { } function u(a, b) { this.x = a || 0; this.y = b || 0 } function xa() { this.elements = [1, 0, 0, 0, 1, 0, 0, 0, 1]; 0 < arguments.length && console.error("THREE.Matrix3: the constructor no longer reads arguments. use .set() instead.") } function V(a, b, c, d, e, f, g, h, l, m) {
@@ -19494,8 +19494,8 @@ function material (options) {
 
 module.exports = exports = material;
 
-},{"../utils/Utils.js":3,".three":21}],24:[function(require,module,exports){
+},{"../utils/Utils.js":3,"three":21}],24:[function(require,module,exports){
 arguments[4][3][0].apply(exports,arguments)
-},{".three":21,"./constants.js":22,"./validate.js":25,"dup":3}],25:[function(require,module,exports){
+},{"three":21,"./constants.js":22,"./validate.js":25,"dup":3}],25:[function(require,module,exports){
 arguments[4][5][0].apply(exports,arguments)
 },{"dup":5}]},{},[1]);

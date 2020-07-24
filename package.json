@@ -12,10 +12,6 @@
     "bugs": {
         "url": "https://github.com/jscastro76/threebox/issues"
     },
-    "dev-dependencies": {
-        "tap-prettify": "0.0.2",
-        "tape": "^4.6.3"
-    },
     "scripts": {
         "build": "browserify -g ./node_modules/uglifyify exports.js > dist/threebox.min.js",
         "dev": "watchify exports.js --verbose -o dist/threebox.js ",
