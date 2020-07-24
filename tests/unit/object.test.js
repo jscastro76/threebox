@@ -1,7 +1,7 @@
 function objectTest(instance){
 
     var mesh = new THREE.Mesh();
-    var group 
+    var group
 
     test('OBJECT _makeGroup from one object', function(t){
         group = instance.objects._makeGroup(mesh, {foo: true});
@@ -28,7 +28,7 @@ function objectTest(instance){
 
         group = instance.objects._makeGroup(mesh, {});
         var addedMethods = instance.objects._addMethods(group, true);
-        
+
         t.equal(addedMethods.setCoords, undefined);
         t.equal(addedMethods.type, 'Group');
         t.end();
@@ -62,5 +62,3 @@ function objectTest(instance){
     })
 
 }
-
-    
