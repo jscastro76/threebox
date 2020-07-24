@@ -2,7 +2,7 @@
  * @author jscastro / https://github.com/jscastro76
  */
 
-var THREE = require("./CSS2DRenderer.js");
+var CSS2D = require("./CSS2DRenderer.js");
 
 function LabelRenderer(map) {
 
@@ -15,7 +15,7 @@ function LabelRenderer(map) {
 	var zoomEventHandler;
 	var onZoomRange = true;
 
-	this.renderer = new THREE.CSS2DRenderer();
+	this.renderer = new CSS2D.CSS2DRenderer();
 
 	this.renderer.setSize(this.map.getCanvas().clientWidth, this.map.getCanvas().clientHeight);
 	this.renderer.domElement.style.position = 'absolute';

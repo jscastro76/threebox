@@ -1,3 +1,4 @@
+var THREE = require("three");
 var utils = require("../utils/Utils.js");
 var Objects = require('./objects.js');
 const OBJLoader = require("./loaders/OBJLoader.js");

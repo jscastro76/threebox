@@ -1,3 +1,4 @@
+var THREE = require("three");
 var utils = require("../utils/Utils.js");
 var material = require("../utils/material.js");
 var Objects = require('./objects.js');

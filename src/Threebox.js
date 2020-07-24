@@ -1,4 +1,5 @@
 var THREE = require("three");
+var mapboxgl = require("mapbox-gl");
 var CameraSync = require("./camera/CameraSync.js");
 var utils = require("./utils/Utils.js");
 var AnimationManager = require("./animation/AnimationManager.js");
@@ -705,4 +706,3 @@ var defaultOptions = {
 	enableTooltips: false
 }
 module.exports = exports = Threebox;
-
