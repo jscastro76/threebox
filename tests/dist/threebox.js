@@ -758,12 +758,12 @@ var utils = {
 	},
 
 	extend: function (original, addition) {
-		for (key in addition) original[key] = addition[key];
+		for (const key in addition) original[key] = addition[key];
 	},
 
 	clone: function (original) {
 		var clone = {};
-		for (key in original) clone[key] = original[key];
+		for (const key in original) clone[key] = original[key];
 		return clone;
 	},
 
@@ -809,7 +809,7 @@ var utils = {
 		var validatedOutput = {};
 		utils.extend(validatedOutput, userInputs);
 
-		for (key of Object.keys(defaults)) {
+		for (const key of Object.keys(defaults)) {
 
 			if (userInputs[key] === undefined) {
 				//make sure required params are present
@@ -906,7 +906,7 @@ Validate.prototype = {
 
         else if (input.constructor === Object) {
 
-            for (key of Object.keys(input)){
+            for (const key of Object.keys(input)){
 
                 if (!['x', 'y', 'z'].includes(key)) {
                     console.error('Rotation parameters must be x, y, or z')
@@ -935,7 +935,7 @@ Validate.prototype = {
 
         else if (input.constructor === Object) {
 
-            for (key of Object.keys(input)){
+            for (const key of Object.keys(input)){
 
                 if (!['x', 'y', 'z'].includes(key)) {
                     console.error('Scale parameters must be x, y, or z')
