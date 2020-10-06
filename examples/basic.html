@@ -33,11 +33,19 @@
 			border-radius: 3px;
 			text-align: center;
 		}
+    #menu {
+      position: absolute;
+      background: #fff;
+      padding: 10px;
+      font-family: 'Open Sans', sans-serif;
+    }
 	</style>
 </head>
 <body>
 	<div id='map' class='map'></div>
-
+  <div id="menu">
+    <button class="button">Remove Layer</button>
+  </div>
 	<script>
 
 		if(!config) console.error("Config not set! Make a copy of 'config_template.js', add in your access token, and save the file as 'config.js'.");
@@ -55,9 +63,11 @@
 			pitch: 60
 		});
 
-
+    document.querySelector('.button').addEventListener('click', function(){
+      map.removeLayer('custom_layer')
+    })
+    
 		map.on('style.load', function() {
-
 			map.addLayer({
 				id: 'custom_layer',
 				type: 'custom',
@@ -82,6 +92,6 @@
 				}
 			})
 		});
-
+  
 	</script>
 </body>

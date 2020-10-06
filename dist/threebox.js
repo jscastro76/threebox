@@ -451,6 +451,13 @@ Threebox.prototype = {
 				}
 			}
 
+      map.removeLayer = function(id) { 
+        this.tb.clear(true).then(d=>{
+          console.log(d)
+          map.style.removeLayer(id);
+        })
+      }
+
 			//listener to the events
 			//this.on('contextmenu', map.onContextMenu);
 			this.on('click', map.onClick);

@@ -9390,6 +9390,11 @@ Threebox.prototype = {
 				}
 			}
 
+      map.removeLayer = function(id) { 
+        this.clear(true);
+        map.style.removeLayer(id);
+      }
+
 			//listener to the events
 			//this.on('contextmenu', map.onContextMenu);
 			this.on('click', map.onClick);
