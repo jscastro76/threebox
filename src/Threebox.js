@@ -141,7 +141,7 @@ Threebox.prototype = {
 			this.overedFeature; //overed state for extrusion layer features
 
 			let canvas = this.getCanvasContainer();
-			this.getCanvasContainer().style.cursor = 'default';
+			this.getCanvasContainer().style.cursor = null;
 			// Variable to hold the starting xy coordinates
 			// when 'mousedown' occured.
 			let start;
@@ -323,7 +323,7 @@ Threebox.prototype = {
 				// Capture the ongoing xy coordinates
 				let current = mousePos(e);
 
-				this.getCanvasContainer().style.cursor = 'default';
+				this.getCanvasContainer().style.cursor = null;
 				//check if being rotated
 				if (e.originalEvent.altKey && this.draggedObject) {
 
@@ -464,7 +464,7 @@ Threebox.prototype = {
 			this.onMouseUp = function (e) {
 
 				// Set a UI indicator for dragging.
-				this.getCanvasContainer().style.cursor = 'default';
+				this.getCanvasContainer().style.cursor = null;
 
 				// Remove these events now that finish has been called.
 				//map.off('mousemove', onMouseMove);
@@ -484,7 +484,7 @@ Threebox.prototype = {
 				if (this.overedFeature) {
 					let features = this.queryRenderedFeatures(e.point);
 					if (features.length > 0 && this.overedFeature.id != features[0].id) {
-						this.getCanvasContainer().style.cursor = 'default';
+						this.getCanvasContainer().style.cursor = null;
 						//only unover when new feature is another
 						this.outFeature(features[0]);
 					}
