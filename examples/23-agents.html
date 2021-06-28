@@ -62,6 +62,24 @@
         map.getContainer().appendChild(stats.dom);
         animate();
 
+        // Add a data source containing GeoJSON data.
+        map.addSource("girton", {
+          type: "geojson",
+          data: "./geojson/girton.geojson",
+        });
+
+        // Add a new layer to visualize the polygon.
+        map.addLayer({
+          id: "Girton",
+          type: "fill",
+          source: "girton", // reference the data source
+          layout: {},
+          paint: {
+            "fill-color": "#0080ff", // blue color fill
+            "fill-opacity": 0.5,
+          },
+        });
+
         map.addLayer({
           id: "custom_layer",
           type: "custom",
