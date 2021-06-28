@@ -72,7 +72,7 @@
               enableSelectingObjects: false,
             });
 
-            const spread = 0.003;
+            const spread = 0.001;
 
             for (let i = 0; i < 5000; i++) {
               let options = {
@@ -86,9 +86,9 @@
 
               tb.loadObj(options, function (model) {
                 model.setCoords([
-                  origin[0] + Math.random() * spread,
+                  origin[0] + Math.random() * 2 * spread,
                   origin[1] + Math.random() * spread,
-                  origin[2] + Math.random() * spread,
+                  1,
                 ]);
                 tb.add(model);
                 model.castShadow = true;
