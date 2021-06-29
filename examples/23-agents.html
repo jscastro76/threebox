@@ -13,6 +13,7 @@
     <script src="../dist/threebox.js" type="text/javascript"></script>
     <link href="../dist/threebox.css" rel="stylesheet" type="text/css" />
     <script src="config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@5/turf.min.js"></script>
     <style>
       body,
       html {
@@ -31,6 +32,65 @@
     <div id="map" class="map"></div>
 
     <script type="module">
+      export function randomPointDistribution(polygon, count) {
+        const triangulation = turf.tesselate(polygon);
+        const number_of_triangles = triangulation.features.length;
+        const total_area = turf.area(polygon);
+
+        let running_total = 0;
+
+        const count_per_triangle = turf.featureReduce(
+          triangulation,
+          (items, triangle, index) => {
+            const area_triangle = turf.area(triangle);
+            const proportion = area_triangle / total_area;
+            const population =
+              number_of_triangles == index + 1
+                ? count - running_total
+                : Math.floor(count * proportion);
+            running_total = running_total + population;
+            return [...items, { triangle, count: population }];
+          },
+          []
+        );
+
+        const random_points = count_per_triangle.reduce(
+          (all_points, current_triangle) => {
+            const new_points = [];
+            for (let i = 1; i <= current_triangle.count; i++) {
+              new_points.push(randomPointInTriangle(current_triangle.triangle));
+            }
+            return [...all_points, ...new_points];
+          },
+          []
+        );
+        return random_points;
+      }
+
+      export function randomPointInTriangle(triangle) {
+        let wb = Math.random();
+        let wc = Math.random();
+
+        if (wb + wc > 1) {
+          wb = 1 - wb;
+          wc = 1 - wc;
+        }
+
+        const [a, b, c] = triangle.geometry.coordinates[0].map((coord) => ({
+          x: coord[0],
+          y: coord[1],
+        }));
+        const rb_x = wb * (b.x - a.x);
+        const rb_y = wb * (b.y - a.y);
+        const rc_x = wc * (c.x - a.x);
+        const rc_y = wc * (c.y - a.y);
+
+        const r_x = rb_x + rc_x + a.x;
+        const r_y = rb_y + rc_y + a.y;
+
+        return [r_x, r_y];
+      }
+
       if (!config)
         console.error(
           "Config not set! Make a copy of 'config_template.js', add in your access token, and save the file as 'config.js'."
@@ -38,7 +98,6 @@
 
       mapboxgl.accessToken = config.accessToken;
 
-      //starting location for both map and eventual sphere
       var origin = [0.0842401385307312, 52.22880322940387, 1];
 
       var map = new mapboxgl.Map({
@@ -62,62 +121,62 @@
         map.getContainer().appendChild(stats.dom);
         animate();
 
-        // Add a data source containing GeoJSON data.
-        map.addSource("girton", {
-          type: "geojson",
-          data: "./geojson/girton.geojson",
-        });
-
-        // Add a new layer to visualize the polygon.
-        map.addLayer({
-          id: "Girton",
-          type: "fill",
-          source: "girton", // reference the data source
-          layout: {},
-          paint: {
-            "fill-color": "#0080ff", // blue color fill
-            "fill-opacity": 0.5,
-          },
-        });
-
-        map.addLayer({
-          id: "custom_layer",
-          type: "custom",
-          renderingMode: "3d",
-          onAdd: function (map, mbxContext) {
-            window.tb = new Threebox(map, mbxContext, {
-              defaultLights: true,
-              enableSelectingObjects: false,
+        fetch("geojson/girton.geojson")
+          .then((response) => response.json())
+          .then((data) => {
+            map.addSource("girton", {
+              type: "geojson",
+              data: data,
             });
 
-            const spread = 0.001;
+            map.addLayer({
+              id: "Girton",
+              type: "fill",
+              source: "girton",
+              layout: {},
+              paint: {
+                "fill-color": "#0080ff",
+                "fill-opacity": 0.5,
+              },
+            });
 
-            for (let i = 0; i < 5000; i++) {
-              let options = {
-                type: "gltf",
-                obj: "./models/person/person@19.glb",
-                units: "meters",
-                rotation: { x: 0, y: 0, z: Math.random() * 360 },
-                scale: 40,
-                anchor: "center",
-              };
+            map.addLayer({
+              id: "People",
+              type: "custom",
+              renderingMode: "3d",
+              onAdd: function (map, mbxContext) {
+                window.tb = new Threebox(map, mbxContext, {
+                  defaultLights: true,
+                  enableSelectingObjects: false,
+                });
 
-              tb.loadObj(options, function (model) {
-                model.setCoords([
-                  origin[0] + Math.random() * 2 * spread,
-                  origin[1] + Math.random() * spread,
-                  1,
-                ]);
-                tb.add(model);
-                model.castShadow = true;
-              });
-            }
-          },
+                const polygon = data.features[0];
+                const points = randomPointDistribution(polygon, 10);
 
-          render: function (gl, matrix) {
-            tb.update();
-          },
-        });
+                for (const point of points) {
+                  let options = {
+                    type: "gltf",
+                    obj: "./models/person/person@19.glb",
+                    units: "meters",
+                    rotation: { x: 0, y: 0, z: Math.random() * 360 },
+                    scale: 40,
+                    anchor: "center",
+                  };
+
+                  tb.loadObj(options, function (model) {
+                    model.setCoords([point.x, point.y, 1]);
+                    tb.add(model);
+                    model.castShadow = true;
+                  });
+                }
+              },
+
+              render: function (gl, matrix) {
+                tb.update();
+              },
+            });
+          })
+          .catch((err) => console.error(err));
       });
     </script>
   </body>
