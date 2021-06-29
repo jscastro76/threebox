@@ -141,6 +141,17 @@
             });
 
             map.addLayer({
+              id: "Outline",
+              type: "line",
+              source: "girton",
+              layout: {},
+              paint: {
+                "line-color": "#000",
+                "line-width": 3,
+              },
+            });
+
+            map.addLayer({
               id: "People",
               type: "custom",
               renderingMode: "3d",
