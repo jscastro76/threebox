@@ -4,6 +4,7 @@
 */
 const THREE = require('../three.js');
 const utils = require("../utils/utils.js");
+const LineString3 = require('./LineString3');
 
 function AnimationManager(map) {
 
@@ -123,7 +124,7 @@ AnimationManager.prototype = {
 						})
 				}
 
-				if (translating) options.pathCurve = new THREE.CatmullRomCurve3(utils.lnglatsToWorld([obj.coordinates, options.coords]));
+				if (translating) options.pathCurve = new LineString3(utils.lnglatsToWorld([obj.coordinates, options.coords]));
 
 				let entry = {
 					type: 'set',
@@ -171,7 +172,7 @@ AnimationManager.prototype = {
 			utils.extend(
 				entry.parameters,
 				{
-					pathCurve: new THREE.CatmullRomCurve3(
+					pathCurve: new LineString3(
 						utils.lnglatsToWorld(options.path)
 					),
 					start: Date.now(),
