@@ -1168,7 +1168,7 @@ Threebox.prototype = {
 
 		if (this.map.repaint) this.map.repaint = false
 
-		var timestamp = Date.now();
+		var timestamp = performance.now();
 
 		// Update any animations
 		this.objects.animationManager.update(timestamp);
@@ -1558,10 +1558,10 @@ AnimationManager.prototype = {
 
 			//if duration is set, animate to the new state
 			if (options.duration > 0) {
-
+				let start = performance.now();
 				let newParams = {
-					start: Date.now(),
-					expiration: Date.now() + options.duration,
+					start: start,
+					expiration: start + options.duration,
 					endState: {}
 				}
 
@@ -1633,21 +1633,51 @@ AnimationManager.prototype = {
 			return this;
 		}
 
-		obj.followPath = function (options, cb) {
+		obj.followPath = function (options, cb){
+            var entry = {
+                type: 'followPath', 
+                parameters: utils._validate(options, defaults.followPath)
+            };
+                     
+			let start = performance.now();
+			let finish = start + entry.parameters.duration;
+            utils.extend(
+                entry.parameters, 
+                {
+                    pathCurve: new THREE.CatmullRomCurve3(
+                        utils.lnglatsToWorld(options.path)
+                    ),
+                    start: start,
+                    expiration: finish,
+                    cb: cb
+                }
+            );    
 
+            this.animationQueue
+                .push(entry);
+
+            map.repaint = true;
+            
+            return this;
+        };
+
+		obj.customFollowPath = function (options, cb) {
 			let entry = {
 				type: 'followPath',
 				parameters: utils._validate(options, defaults.followPath)
 			};
 
+			let start = performance.now();
+			let finish = start + entry.parameters.duration;
 			utils.extend(
 				entry.parameters,
 				{
 					pathCurve: new LineString3(
-						utils.lnglatsToWorld(options.path)
+						utils.lnglatsToWorld(options.path),
+						options.pathWidths
 					),
-					start: Date.now(),
-					expiration: Date.now() + entry.parameters.duration,
+					start: start,
+					expiration: finish,
 					cb: cb
 				}
 			);
@@ -1736,10 +1766,11 @@ AnimationManager.prototype = {
 		//[jscastro] play default animation
 		obj.playDefault = function (options) {
 			if (obj.mixer && obj.hasDefaultAnimation) {
+				let start = performance.now();
 
 				let newParams = {
-					start: Date.now(),
-					expiration: Date.now() + options.duration,
+					start: start,
+					expiration: start + options.duration,
 					endState: {}
 				}
 
@@ -1822,7 +1853,6 @@ AnimationManager.prototype = {
 	},
 
 	update: function (now) {
-
 		if (this.previousFrameTime === undefined) this.previousFrameTime = now;
 
 		let dimensions = ['X', 'Y', 'Z'];
@@ -2376,34 +2406,43 @@ const Curve = require('./Curve.js');
 
 class LineString3 extends Curve {
 
-	constructor( points = [], closed = false, curveType = 'centripetal', tension = 0.5 ) {
-
+	constructor(points, widths) {
 		super();
 
 		this.type = 'LineString3';
-
 		this.points = points;
-		this.closed = closed;
-		this.curveType = curveType;
-		this.tension = tension;
+		this.widths = closed;
 
 		let cumulativeDistance = 0;
-		this.cumulativeDistances = this.points.map((point, i) => cumulativeDistance += i === 0 ? 0 : point.distanceTo(points[i - 1]));
+		this.cumulativeDistances = this.points.map((point, i) => {
+			if (i === 0) {
+				return 0;
+			}
+
+			cumulativeDistance += point.distanceTo(points[i - 1]);
+			return cumulativeDistance;
+		});
 	}
 
 	getPoint( t, optionalTarget = new Vector3() ) {
 		const point = optionalTarget;
 
 		const dist = t * this.cumulativeDistances[this.cumulativeDistances.length - 1];
-		let i = 0;
-		while(this.cumulativeDistances[i + 1] < dist) {
-			i++;
+
+		let i = 1;
+		while(this.cumulativeDistances[i] < dist) {
+			i++
 		}
 
-		const localDist = dist - this.cumulativeDistances[i];
-		const newT = localDist / (this.cumulativeDistances[i + 1] - this.cumulativeDistances[i])
+		const localDist = dist - this.cumulativeDistances[i - 1];
+		const newT = localDist / (this.cumulativeDistances[i] - this.cumulativeDistances[i - 1])
 
-		point.lerpVectors(this.points[i], this.points[i + 1], newT);
+		if(newT > 1 || newT < 0) {
+			console.warn("Bad t: " + newT);
+		}
+
+		point.lerpVectors(this.points[i - 1], this.points[i], newT);
+
 		return point;
 	}
 
@@ -2436,15 +2475,14 @@ class LineString3 extends Curve {
 		data.points = [];
 
 		for ( let i = 0, l = this.points.length; i < l; i ++ ) {
-
 			const point = this.points[ i ];
 			data.points.push( point.toArray() );
-
 		}
 
 		data.closed = this.closed;
 		data.curveType = this.curveType;
 		data.tension = this.tension;
+		data.widths = this.widths.slice();
 
 		return data;
 

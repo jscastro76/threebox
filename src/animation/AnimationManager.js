@@ -87,10 +87,10 @@ AnimationManager.prototype = {
 
 			//if duration is set, animate to the new state
 			if (options.duration > 0) {
-
+				let start = performance.now();
 				let newParams = {
-					start: Date.now(),
-					expiration: Date.now() + options.duration,
+					start: start,
+					expiration: start + options.duration,
 					endState: {}
 				}
 
@@ -162,21 +162,51 @@ AnimationManager.prototype = {
 			return this;
 		}
 
-		obj.followPath = function (options, cb) {
+		obj.followPath = function (options, cb){
+            var entry = {
+                type: 'followPath', 
+                parameters: utils._validate(options, defaults.followPath)
+            };
+                     
+			let start = performance.now();
+			let finish = start + entry.parameters.duration;
+            utils.extend(
+                entry.parameters, 
+                {
+                    pathCurve: new THREE.CatmullRomCurve3(
+                        utils.lnglatsToWorld(options.path)
+                    ),
+                    start: start,
+                    expiration: finish,
+                    cb: cb
+                }
+            );    
 
+            this.animationQueue
+                .push(entry);
+
+            map.repaint = true;
+            
+            return this;
+        };
+
+		obj.customFollowPath = function (options, cb) {
 			let entry = {
 				type: 'followPath',
 				parameters: utils._validate(options, defaults.followPath)
 			};
 
+			let start = performance.now();
+			let finish = start + entry.parameters.duration;
 			utils.extend(
 				entry.parameters,
 				{
 					pathCurve: new LineString3(
-						utils.lnglatsToWorld(options.path)
+						utils.lnglatsToWorld(options.path),
+						options.pathWidths
 					),
-					start: Date.now(),
-					expiration: Date.now() + entry.parameters.duration,
+					start: start,
+					expiration: finish,
 					cb: cb
 				}
 			);
@@ -265,10 +295,11 @@ AnimationManager.prototype = {
 		//[jscastro] play default animation
 		obj.playDefault = function (options) {
 			if (obj.mixer && obj.hasDefaultAnimation) {
+				let start = performance.now();
 
 				let newParams = {
-					start: Date.now(),
-					expiration: Date.now() + options.duration,
+					start: start,
+					expiration: start + options.duration,
 					endState: {}
 				}
 
@@ -351,7 +382,6 @@ AnimationManager.prototype = {
 	},
 
 	update: function (now) {
-
 		if (this.previousFrameTime === undefined) this.previousFrameTime = now;
 
 		let dimensions = ['X', 'Y', 'Z'];
