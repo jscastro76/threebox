@@ -1,7 +1,7 @@
 const utils = require("../utils/utils.js");
 const Objects = require('./objects.js');
 const CSS2D = require('./CSS2DRenderer.js');
-var THREE = require("../three.js");
+var THREE = require("three");
 
 function Tooltip(obj) {
 

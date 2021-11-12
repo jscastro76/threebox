@@ -2,7 +2,7 @@
  * @author peterqliu / https://github.com/peterqliu
  * @author jscastro / https://github.com/jscastro76
  */
-const THREE = require("../three.js");
+const THREE = require("three");
 const utils = require("../utils/utils.js");
 const ThreeboxConstants = require("../utils/constants.js");
 

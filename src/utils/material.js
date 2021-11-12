@@ -6,7 +6,7 @@
 // - provide none of these parameters, to use the default material
 
 var utils = require("../utils/utils.js");
-var THREE = require("../three.js");
+var THREE = require("three");
 
 var defaults = {
 	material: 'MeshBasicMaterial',

@@ -1,4 +1,4 @@
-const THREE = require('../../three.js');
+const THREE = require('three');
 
 /**
  * @author Rich Tibbett / https://github.com/richtr

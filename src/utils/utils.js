@@ -1,4 +1,4 @@
-var THREE = require("../three.js");
+var THREE = require("three");
 var Constants = require("./constants.js");
 var validate = require("./validate.js");
 
