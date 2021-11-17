@@ -39,5 +39,8 @@
         "mapbox-gl-js",
         "azure-maps",
         "3D"
-    ]
+    ],
+    "dependencies": {
+        "three": "^0.127.0"
+    }
 }
