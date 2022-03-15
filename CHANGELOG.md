@@ -1,3 +1,32 @@
+## 2.2.7
+
+Minor version by [@jscastro76](https://github.com/jscastro76), some enhancements and bugs. 
+
+#### :beetle: Bug fixes
+- #323 Azure Maps sample doesn't work if you change map style  
+
+- - - 
+
+
+## 2.2.6
+
+Minor version by [@jscastro76](https://github.com/jscastro76), some enhancements and bugs. 
+
+#### :sparkles: Enhancements
+- #310 extrusion.materials null by default, but not labelled as 'required' in documentation 
+  - THREE.MeshPhongMaterial({ color: 0x660000, side: THREE.DoubleSide }) added as default material to extrusions
+
+#### :beetle: Bug fixes
+- #255 tb.updateSunGround raises an error if value is higher than 1. 
+  - Multiplied also the raster-opacity by 4 to make it more realistic with the light hours
+- #319 dat.gui.module has changed in threejs 
+- #320 Cannot read properties of undefined (reading 'appendChild')  
+
+#### :pencil: Documentation
+- Updated [Threebox documentation](/docs/Threebox.md) (`tb.extrusion` param `materials`) 
+
+- - - 
+
 ## 2.2.5
 
 Minor version by [@jscastro76](https://github.com/jscastro76), some enhancements and bugs. 
@@ -8,6 +37,9 @@ Minor version by [@jscastro76](https://github.com/jscastro76), some enhancements
 
 #### :beetle: Bug fixes
 - #286 Missing THREE in sphere.js  
+
+#### :pencil: Documentation
+- Updated [Threebox documentation](/docs/Threebox.md) (`tb.loadObj` params `clone`, `tb.defaultCursor`)
 
 - - - 
 
