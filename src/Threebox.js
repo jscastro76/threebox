@@ -791,8 +791,7 @@ Threebox.prototype = {
 	},
 
 	intersectionStack: [],
-	selectionRotationIndex: 0,
- 
+	selectionRotationIndex: 0, 
 	getIteratedSelectionIndex(intersects) {
 		if(intersects.length == 0) return null;
 
@@ -800,13 +799,22 @@ Threebox.prototype = {
 
 		if(this.utils.arrayShallowEqual(this.intersectionStack, intersectedObjects))
 		{
+			// if the same objects in the same order are clicked,
+			// simply go to the next object
 			this.selectionRotationIndex = (this.selectionRotationIndex + 1) % this.intersectionStack.length;
 		} else {
+			// in this case the objects that are clicked differ from last call
 			this.intersectionStack = intersectedObjects;
 			if(this.map.selectedObject) {
+				// if we already have an object selected, find it in the stack.
+				// this will work even when the previously selected object is not
+				// in the new stack, as findIndex will return -1 and
+				// therefore selectionStackIndex + 1 will come out as 0.
 				const selectionStackIndex = this.intersectionStack.findIndex(entry => entry == this.map.selectedObject.children[0].children[0]);
 				this.selectionRotationIndex = (selectionStackIndex + 1) % this.intersectionStack.length;
 			} else {
+				// if we don't have any object selected yet simply start
+				// with the first one (closest one to the camera)
 				this.selectionRotationIndex = 0;
 			}
 		}
