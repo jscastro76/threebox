@@ -1088,7 +1088,7 @@ Objects.prototype = {
 			coordinates: [[[]]],
 			geometryOptions: {},
 			height: 100,
-			materials: null,
+			materials: new THREE.MeshPhongMaterial({ color: 0x660000, side: THREE.DoubleSide }),
 			scale: 1,
 			rotation: 0,
 			units: 'scene',

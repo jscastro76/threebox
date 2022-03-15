@@ -85,6 +85,7 @@
 		);
 
 		 
+		import { GUI } from 'https://threejs.org/examples/jsm/libs/lil-gui.module.min.js';
 		import Stats from 'https://threejs.org/examples/jsm/libs/stats.module.js';
 
 		map.on('style.load', function () {
@@ -108,8 +109,6 @@
 				}
 			})
 		});
-
-		import { GUI } from 'https://threejs.org/examples/jsm/libs/dat.gui.module.js';
 
 		let stats, gui, guiStatsEl;
 		let geometry = false;
@@ -221,7 +220,7 @@
 			guiStatsEl = document.createElement('li');
 			guiStatsEl.classList.add('gui-stats');
 
-			perfFolder.__ul.appendChild(guiStatsEl);
+			perfFolder.$children.appendChild(guiStatsEl);
 			perfFolder.open();
 
 		}

@@ -12901,7 +12901,7 @@ Threebox.prototype = {
 	updateSunGround: function (sunPos) {
 		if (this.terrainLayerName != '') {
 			// update the raster layer paint property with the position of the sun based on the selected time
-			this.map.setPaintProperty(this.terrainLayerName, 'raster-opacity', Math.max(sunPos.altitude, 0.25));
+			this.map.setPaintProperty(this.terrainLayerName, 'raster-opacity', Math.max(Math.min(1, sunPos.altitude * 4), 0.25));
 		}
 	},
 
@@ -13000,7 +13000,7 @@ Threebox.prototype = {
 
 	programs: function () { return this.renderer.info.programs.length },
 
-	version: '2.2.5',
+	version: '2.2.7',
 
 }
 
@@ -29763,7 +29763,7 @@ Objects.prototype = {
 			coordinates: [[[]]],
 			geometryOptions: {},
 			height: 100,
-			materials: null,
+			materials: new THREE.MeshPhongMaterial({ color: 0x660000, side: THREE.DoubleSide }),
 			scale: 1,
 			rotation: 0,
 			units: 'scene',

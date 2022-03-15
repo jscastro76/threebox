@@ -1,4 +1,4 @@
-v.2.0.1 - v.2.2.5
+v.2.0.1 - v.2.2.6
 MIT License
 Copyright (c) 2020 Jesus Serrano
 

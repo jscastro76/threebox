@@ -1,9 +1,9 @@
 # `Threebox`
 
+![npm](https://img.shields.io/npm/dt/threebox-plugin?style=social)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/jscastro76/threebox?style=flat-square)](https://github.com/jscastro76/threebox/releases/)
 [![NPM version](http://img.shields.io/npm/v/threebox-plugin.svg?style=flat-square)](https://www.npmjs.org/package/threebox-plugin)
 [![NPM license](http://img.shields.io/npm/l/threebox-plugin.svg?style=flat-square)](https://www.npmjs.org/package/threebox-plugin)
-![npm](https://img.shields.io/npm/dt/threebox-plugin?style=social)
 
 A **[*Three.js*](https://threejs.org/)** plugin for **[*Mapbox GL JS*](https://docs.mapbox.com/mapbox-gl-js/examples/)** and **[*Azure Maps*](https://azure.microsoft.com/en-us/services/azure-maps/)** using the [`CustomLayerInterface`](https://docs.mapbox.com/mapbox-gl-js/api/properties/#customlayerinterface) feature. Provides convenient methods to manage objects in lnglat coordinates, and to synchronize the map and scene cameras.
 <img alt="threebox" src="docs/gallery.jpg">

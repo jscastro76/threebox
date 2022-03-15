@@ -86,7 +86,7 @@
 				}
 			);
 			tb.setSunlight(new Date(2020, 6, 18, 18))
-			map.events.add("load", function (e) {
+			map.events.add("style.load", function (e) {
 				
 				intMap.getContainer().appendChild(stats.dom);
 				animate();
