@@ -795,7 +795,9 @@ Threebox.prototype = {
 	getIteratedSelectionIndex(intersects) {
 		if(intersects.length == 0) return null;
 
-		const intersectedObjects = intersects.map((intersection) => intersection.object);
+		const intersectedObjects = intersects
+		.map((intersection) => intersection.object)
+		.filter((intersection) => intersection.selectable);
 
 		if(this.utils.arrayShallowEqual(this.intersectionStack, intersectedObjects))
 		{
@@ -832,7 +834,9 @@ Threebox.prototype = {
 		this.raycaster.setFromCamera(mouse, this.camera);
 
 		// calculate objects intersecting the picking ray
-		let intersects = this.raycaster.intersectObjects(this.world.children, true);
+		let intersects = this.raycaster
+		.intersectObjects(this.world.children, true)
+		.filter(intersection => 'selectable' in intersection.object ? intersection.object.selectable : true)
 
 		return intersects
 	},
