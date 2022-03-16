@@ -797,7 +797,6 @@ Threebox.prototype = {
 
 		const intersectedObjects = intersects
 		.map((intersection) => intersection.object)
-		.filter((intersection) => intersection.selectable);
 
 		if(this.utils.arrayShallowEqual(this.intersectionStack, intersectedObjects))
 		{
