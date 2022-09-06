@@ -231,8 +231,14 @@ AnimationManager.prototype = {
 			}
 
 			if (s) {
-				this.scale.set(s[0], s[1], s[2]);
-				options.scale = this.scale;
+				if (this.userData.units === "scene" && typeof s === "number") {
+					const initialScale = this.userData.scale;
+					const newScale = s / initialScale;
+					obj.scale.set(newScale, newScale, newScale);
+				} else {
+					this.scale.set(s[0], s[1], s[2]);
+					options.scale = this.scale;
+				}
 			}
 
 			if (q) {
