@@ -93,13 +93,7 @@
     });
 
     function setScale(scale) {
-        const randomNumber = randomInteger(0, 360);
-        // globalModel.setRotation({ x: 0, y: 0, z: randomNumber })
         globalModel.setScale(scale);
-    }
-
-    function randomInteger(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
 </script>
