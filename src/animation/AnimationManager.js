@@ -237,8 +237,8 @@ AnimationManager.prototype = {
 					obj.scale.set(newScale, newScale, newScale);
 				} else {
 					this.scale.set(s[0], s[1], s[2]);
-					options.scale = this.scale;
 				}
+				options.scale = this.scale;
 			}
 
 			if (q) {
