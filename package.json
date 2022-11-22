@@ -30,7 +30,7 @@
         "browserify": "^17.0.0",
         "ncp": "^2.0.0",
         "tape": "^5.1.1",
-        "tinyify": "^3.0.0",
+        "tinyify": "^4.0.0",
         "uglifyify": "^5.0.2",
         "watchify": "^4.0.0"
     },
