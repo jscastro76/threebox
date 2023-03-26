@@ -969,7 +969,7 @@ tb.multiLayer : Boolean
 ```
 By default is `false`.  
 This get/set property receives and returns the value to enable the option to have multiple 3D layers, where a default layer will be created internally that will manage the `tb.update` calls
-Despite this value can be changed in runtime, the value won't take effect unless there's a style change through `tb.setStyle`. So if you know your page could have multiple 3D layers, it's recommended to initialize it to true in Threeboc constructor with the init param `multiLayer: true`. 
+Despite this value can be changed in runtime, the value won't take effect unless there's a style change through `tb.setStyle`. So if you know your page could have multiple 3D layers, it's recommended to initialize it to true in Threebox constructor with the init param `multiLayer: true`. 
 
 <br>
 
