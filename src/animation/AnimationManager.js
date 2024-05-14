@@ -10,17 +10,23 @@ function AnimationManager(map) {
     this.map = map
     this.enrolledObjects = [];    
     this.previousFrameTime;
-
+	this.init(map)
 };
 
 AnimationManager.prototype = {
+
+	init: function(map) {
+		this.map = map;
+		console.log(map, this.map)
+	},
 
 	unenroll: function (obj) {
 		this.enrolledObjects.splice(this.enrolledObjects.indexOf(obj), 1);
 	},
 
 	enroll: function (obj) {
-
+		const inst = this;
+		console.log("AM", inst)
 		//[jscastro] add the object default animations
 		obj.clock = new THREE.Clock();
 		obj.hasDefaultAnimation = false;
@@ -133,7 +139,7 @@ AnimationManager.prototype = {
 				this.animationQueue
 					.push(entry);
 
-				this.map.repaint = true;
+				inst.map.repaint = true;
 			}
 
 			//if no duration set, stop object's existing animations and go to that state immediately
@@ -189,6 +195,7 @@ AnimationManager.prototype = {
 		};
 
 		obj._setObject = function (options) {
+			console.log(obj, this)
 
 			//default scale always
 			obj.setScale();
@@ -200,7 +207,7 @@ AnimationManager.prototype = {
 			let q = options.quaternion; // [axis, angle in rads]
 			let t = options.translate; // [jscastro] lnglat + height for 3D objects
 			let wt = options.worldTranslate; // [jscastro] Vector3 translation
-
+inst
 			if (p) {
 				this.coordinates = p;
 				let c = utils.projectToWorld(p);
@@ -251,7 +258,7 @@ AnimationManager.prototype = {
 			this.setReceiveShadowFloor();
 
 			this.updateMatrixWorld();
-			this.map.repaint = true;
+			inst.map.repaint = true;
 
 			//const threeTarget = new THREE.EventDispatcher();
 			//threeTarget.dispatchEvent({ type: 'event', detail: { object: this, action: { position: options.position, rotation: options.rotation, scale: options.scale } } });
@@ -283,7 +290,7 @@ AnimationManager.prototype = {
 				this.animationQueue
 					.push(entry);
 
-				this.map.repaint = true
+				inst.map.repaint = true
 				return this;
 			}
 		}
@@ -343,7 +350,7 @@ AnimationManager.prototype = {
 				// Update the animation mixer and render this frame
 				obj.mixer.update(0.01);
 			}
-			this.map.repaint = true;
+			inst.map.repaint = true;
 			return this;
 		}
 

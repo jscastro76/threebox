@@ -11,7 +11,7 @@ const Object3D = require('./Object3D.js');
  * @param {any} opt must fit the default defined in Objects.prototype._defaults.extrusion 
  * @param {arr} opt.coordinates could receive a feature.geometry.coordinates
  */
-function extrusion(opt) {
+function extrusion(opt, objects) {
 
 	opt = utils._validate(opt, Objects.prototype._defaults.extrusion);
 	let shape = extrusion.prototype.buildShape(opt.coordinates);
@@ -19,7 +19,7 @@ function extrusion(opt) {
 	let mesh = new THREE.Mesh(geometry, opt.materials);
 	opt.obj = mesh;
 	//[jscastro] we convert it in Object3D to add methods, bounding box, model, tooltip...
-	return new Object3D(opt);
+	return new Object3D(opt, objects);
 
 }
 

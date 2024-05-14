@@ -15,7 +15,7 @@ const gltfLoader = new GLTFLoader();
 const fbxLoader = new FBXLoader();
 const daeLoader = new ColladaLoader();
 
-function loadObj(options, cb, promise) {
+function loadObj(options, cb, promise, objects) {
 
 	if (options === undefined) return console.error("Invalid options provided to loadObj()");
 	options = utils._validate(options, Objects.prototype._defaults.loadObj);
@@ -82,7 +82,7 @@ function loadObj(options, cb, promise) {
 			if (options.normalize) { normalizeSpecular(obj); }
 			obj.name = "model";
 			let userScaleGroup = Objects.prototype._makeGroup(obj, options);
-			Objects.prototype._addMethods(userScaleGroup);
+			Objects.prototype._addMethods(userScaleGroup, false, objects);
 			//[jscastro] calculate automatically the pivotal center of the object
 			userScaleGroup.setAnchor(options.anchor);
 			//[jscastro] override the center calculated if the object has adjustments

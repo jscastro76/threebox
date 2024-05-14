@@ -3,7 +3,7 @@ const Objects = require('./objects.js');
 const CSS2D = require('./CSS2DRenderer.js');
 var THREE = require("../three.js");
 
-function Tooltip(obj) {
+function Tooltip(obj, objects) {
 
 	obj = utils._validate(obj, Objects.prototype._defaults.tooltip);
 
@@ -15,7 +15,7 @@ function Tooltip(obj) {
 		tooltip.visible = false;
 		tooltip.name = "tooltip";
 		var userScaleGroup = Objects.prototype._makeGroup(tooltip, obj);
-		Objects.prototype._addMethods(userScaleGroup);
+		Objects.prototype._addMethods(userScaleGroup, false, objects);
 		return userScaleGroup;
 	}
 
