@@ -10,15 +10,10 @@ const CSS2D = require("./CSS2DRenderer.js");
 
 function Objects(map) {
   this.map = map;
-  this.init(map);
+  this.animationManager = new AnimationManager(map);
 }
 
 Objects.prototype = {
-  init: function (map) {
-    Object.defineProperty(this, "map", map);
-	this.animationManager = new AnimationManager(map);
-  },
-
   // standard 1px line with gl
   line: function (obj) {
     obj = utils._validate(obj, this._defaults.line);
@@ -49,13 +44,11 @@ Objects.prototype = {
 
   extrusion: function (options) {},
 
-  unenroll: function (obj, isStatic) {
-    var root = this;
-
+  unenroll: function (obj, isStatic, objects) {
     if (isStatic) {
     } else {
       // Bestow this mesh with animation superpowers and keeps track of its movements in the global animation queue
-      root.animationManager.unenroll(obj);
+      objects.animationManager.unenroll(obj);
     }
   },
 
@@ -961,7 +954,7 @@ Objects.prototype = {
     };
 
     obj.dispose = function () {
-      Objects.prototype.unenroll(obj);
+      Objects.prototype.unenroll(obj, false, objects);
 
       obj.traverse((o) => {
         //don't dispose th object itself as it will be recursive
