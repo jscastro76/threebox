@@ -911,7 +911,7 @@ Objects.prototype = {
         if (options && options.feature) dupe.userData.feature = options.feature;
         dupe.userData.feature.properties.uuid = dupe.uuid;
       }
-      root._addMethods(dupe); // add methods
+      root._addMethods(dupe, false, objects); // add methods
 
       if (!options || utils.equal(options.scale, obj.userData.scale)) {
         //no options, no changes, just return the same object
