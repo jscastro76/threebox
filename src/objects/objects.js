@@ -8,8 +8,8 @@ const THREE = require('../three.js');
 const AnimationManager = require("../animation/AnimationManager.js");
 const CSS2D = require("./CSS2DRenderer.js");
 
-function Objects(){
-
+function Objects(map){
+	this.map = map;
 }
 
 Objects.prototype = {
@@ -169,13 +169,14 @@ Objects.prototype = {
 
 			//[jscastro] Auxiliar method to rotate an object on an axis
 			function _applyAxisAngle(model, point, axis, degrees) {
+				if (map == undefined) throw "Map arg is undefined (fifth arg)";
 				let theta = utils.radify(degrees);
 				model.position.sub(point); // remove the offset
 				model.position.applyAxisAngle(axis, theta); // rotate the POSITION
 				model.position.add(point); // re-add the offset
 				model.rotateOnAxis(axis, theta)
 
-				tb.map.repaint = true;
+				this.map.repaint = true;
 			}
 
 
@@ -801,7 +802,8 @@ Objects.prototype = {
 			return o;
 		}
 
-		obj.remove = function (o) {
+		obj.remove = function (o, map) {
+			if (map == undefined) throw "map object is undefined (second arg)"
 			if (!o) return;
 			o.traverse(m => {
 				//console.log('dispose geometry!')
@@ -818,7 +820,7 @@ Objects.prototype = {
 			})
 
 			obj.scaleGroup.remove(o);
-			tb.map.repaint = true;
+			map.repaint = true;
 		}
 
 		//[jscastro] clone + assigning all the attributes

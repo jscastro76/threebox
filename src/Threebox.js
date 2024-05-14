@@ -47,7 +47,7 @@ Threebox.prototype = {
 		this.map = map;
 		this.map.tb = this; //[jscastro] needed if we want to queryRenderedFeatures from map.onload
 
-		this.objects = new Objects();
+		this.objects = new Objects(this.map);
 
 		this.mapboxVersion = parseFloat(this.map.version); 
 
