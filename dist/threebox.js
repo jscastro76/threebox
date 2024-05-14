@@ -318,7 +318,6 @@ Threebox.prototype = {
 		this.map.tb = this; //[jscastro] needed if we want to queryRenderedFeatures from map.onload
 
 		this.objects = new Objects(this.map);
-		console.warn("TB", this)
 
 		this.mapboxVersion = parseFloat(this.map.version); 
 
@@ -950,46 +949,46 @@ Threebox.prototype = {
 	},
 
 	// Objects
-	sphere: function (options) {		console.warn("DIOSTRACAN", this)
+	sphere: function (options) {		
 
 		this.setDefaultView(options, this.options);
 		return sphere(options, this.world, this.objects)
 	},
 
-	line: function(options) {		console.warn("DIOSTRACAN", this)
+	line: function(options) {		
 
 		return line(options,this.objects);
 	},
 
-	label: function(options) {		console.warn("DIOSTRACAN", this)
+	label: function(options) {		
 
 		return label(options, this.objects)
 	},
 
-	tooltip: function(options) {		console.warn("DIOSTRACAN", this)
+	tooltip: function(options) {		
 
 		return tooltip(options, this.objects)
 	},
 
 	tube: function (options) {
-		this.setDefaultView(options, this.options);		console.warn("DIOSTRACAN", this)
+		this.setDefaultView(options, this.options);		
 
 		return tube(options, this.world, this.objects)
 	},
 
 	extrusion: function (options) {
-		this.setDefaultView(options, this.options);		console.warn("DIOSTRACAN", this)
+		this.setDefaultView(options, this.options);		
 
 		return extrusion(options, this.objects);
 	},
 
 	Object3D: function (options) {
-		this.setDefaultView(options, this.options);		console.warn("DIOSTRACAN", this)
+		this.setDefaultView(options, this.options);		
 
 		return Object3D(options, this.objects)
 	},
 
-	loadObj: async function loadObj(options, cb) {		console.warn("DIOSTRACAN", this)
+	loadObj: async function loadObj(options, cb) {		
 
 		this.setDefaultView(options, this.options);
 		const inst = this;
@@ -1506,7 +1505,6 @@ AnimationManager.prototype = {
 
 	init: function(map) {
 		this.map = map;
-		console.log(map, this.map)
 	},
 
 	unenroll: function (obj) {
@@ -1515,7 +1513,6 @@ AnimationManager.prototype = {
 
 	enroll: function (obj) {
 		const inst = this;
-		console.log("AM", inst)
 		//[jscastro] add the object default animations
 		obj.clock = new THREE.Clock();
 		obj.hasDefaultAnimation = false;
@@ -1684,7 +1681,6 @@ AnimationManager.prototype = {
 		};
 
 		obj._setObject = function (options) {
-			console.log(obj, this)
 
 			//default scale always
 			obj.setScale();
@@ -1696,7 +1692,7 @@ AnimationManager.prototype = {
 			let q = options.quaternion; // [axis, angle in rads]
 			let t = options.translate; // [jscastro] lnglat + height for 3D objects
 			let wt = options.worldTranslate; // [jscastro] Vector3 translation
-inst
+
 			if (p) {
 				this.coordinates = p;
 				let c = utils.projectToWorld(p);
@@ -17258,7 +17254,6 @@ Objects.prototype = {
   },
 
   _addMethods: function (obj, isStatic, objects) {
-	console.warn("ASDBASDVGJSA", objects)
     var root = this;
     const labelName = "label";
     const tooltipName = "tooltip";
@@ -17364,7 +17359,6 @@ Objects.prototype = {
 
       //[jscastro] Auxiliar method to rotate an object on an axis
       function _applyAxisAngle(model, point, axis, degrees) {
-        if (map == undefined) throw "Map arg is undefined (fifth arg)";
         let theta = utils.radify(degrees);
         model.position.sub(point); // remove the offset
         model.position.applyAxisAngle(axis, theta); // rotate the POSITION
@@ -18090,8 +18084,7 @@ Objects.prototype = {
       return o;
     };
 
-    obj.remove = function (o, map) {
-      if (map == undefined) throw "map object is undefined (second arg)";
+    obj.remove = function (o) {
       if (!o) return;
       o.traverse((m) => {
         //console.log('dispose geometry!')

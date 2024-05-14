@@ -60,7 +60,6 @@ Objects.prototype = {
   },
 
   _addMethods: function (obj, isStatic, objects) {
-	console.warn("ASDBASDVGJSA", objects)
     var root = this;
     const labelName = "label";
     const tooltipName = "tooltip";
@@ -166,7 +165,6 @@ Objects.prototype = {
 
       //[jscastro] Auxiliar method to rotate an object on an axis
       function _applyAxisAngle(model, point, axis, degrees) {
-        if (map == undefined) throw "Map arg is undefined (fifth arg)";
         let theta = utils.radify(degrees);
         model.position.sub(point); // remove the offset
         model.position.applyAxisAngle(axis, theta); // rotate the POSITION
@@ -892,8 +890,7 @@ Objects.prototype = {
       return o;
     };
 
-    obj.remove = function (o, map) {
-      if (map == undefined) throw "map object is undefined (second arg)";
+    obj.remove = function (o) {
       if (!o) return;
       o.traverse((m) => {
         //console.log('dispose geometry!')

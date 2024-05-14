@@ -48,7 +48,6 @@ Threebox.prototype = {
 		this.map.tb = this; //[jscastro] needed if we want to queryRenderedFeatures from map.onload
 
 		this.objects = new Objects(this.map);
-		console.warn("TB", this)
 
 		this.mapboxVersion = parseFloat(this.map.version); 
 
@@ -680,46 +679,46 @@ Threebox.prototype = {
 	},
 
 	// Objects
-	sphere: function (options) {		console.warn("DIOSTRACAN", this)
+	sphere: function (options) {		
 
 		this.setDefaultView(options, this.options);
 		return sphere(options, this.world, this.objects)
 	},
 
-	line: function(options) {		console.warn("DIOSTRACAN", this)
+	line: function(options) {		
 
 		return line(options,this.objects);
 	},
 
-	label: function(options) {		console.warn("DIOSTRACAN", this)
+	label: function(options) {		
 
 		return label(options, this.objects)
 	},
 
-	tooltip: function(options) {		console.warn("DIOSTRACAN", this)
+	tooltip: function(options) {		
 
 		return tooltip(options, this.objects)
 	},
 
 	tube: function (options) {
-		this.setDefaultView(options, this.options);		console.warn("DIOSTRACAN", this)
+		this.setDefaultView(options, this.options);		
 
 		return tube(options, this.world, this.objects)
 	},
 
 	extrusion: function (options) {
-		this.setDefaultView(options, this.options);		console.warn("DIOSTRACAN", this)
+		this.setDefaultView(options, this.options);		
 
 		return extrusion(options, this.objects);
 	},
 
 	Object3D: function (options) {
-		this.setDefaultView(options, this.options);		console.warn("DIOSTRACAN", this)
+		this.setDefaultView(options, this.options);		
 
 		return Object3D(options, this.objects)
 	},
 
-	loadObj: async function loadObj(options, cb) {		console.warn("DIOSTRACAN", this)
+	loadObj: async function loadObj(options, cb) {		
 
 		this.setDefaultView(options, this.options);
 		const inst = this;

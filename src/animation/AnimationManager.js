@@ -17,7 +17,6 @@ AnimationManager.prototype = {
 
 	init: function(map) {
 		this.map = map;
-		console.log(map, this.map)
 	},
 
 	unenroll: function (obj) {
@@ -26,7 +25,6 @@ AnimationManager.prototype = {
 
 	enroll: function (obj) {
 		const inst = this;
-		console.log("AM", inst)
 		//[jscastro] add the object default animations
 		obj.clock = new THREE.Clock();
 		obj.hasDefaultAnimation = false;
@@ -195,7 +193,6 @@ AnimationManager.prototype = {
 		};
 
 		obj._setObject = function (options) {
-			console.log(obj, this)
 
 			//default scale always
 			obj.setScale();
@@ -207,7 +204,7 @@ AnimationManager.prototype = {
 			let q = options.quaternion; // [axis, angle in rads]
 			let t = options.translate; // [jscastro] lnglat + height for 3D objects
 			let wt = options.worldTranslate; // [jscastro] Vector3 translation
-inst
+
 			if (p) {
 				this.coordinates = p;
 				let c = utils.projectToWorld(p);
