@@ -39,13 +39,12 @@ http.createServer(function (request, response) {
             ".woff2": "font/woff2",
 
         };
-
         var isValidExt = validExtensions[ext];
 
         var fileStream = fs.createReadStream(fsPath);
         fileStream.pipe(response);
         fileStream.on('open', function () {
-            response.setHeader("Content-Type", validExtensions[ext]);
+            response.setHeader("Content-Type", validExtensions[ext] || "");
             response.writeHead(200);
         });
         fileStream.on('error', function (e) {

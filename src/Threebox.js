@@ -47,7 +47,7 @@ Threebox.prototype = {
 		this.map = map;
 		this.map.tb = this; //[jscastro] needed if we want to queryRenderedFeatures from map.onload
 
-		this.objects = new Objects();
+		this.objects = new Objects(this.map);
 
 		this.mapboxVersion = parseFloat(this.map.version); 
 
@@ -679,40 +679,55 @@ Threebox.prototype = {
 	},
 
 	// Objects
-	sphere: function (options) {
+	sphere: function (options) {		
+
 		this.setDefaultView(options, this.options);
-		return sphere(options, this.world)
+		return sphere(options, this.world, this.objects)
 	},
 
-	line: line,
+	line: function(options) {		
 
-	label: label,
+		return line(options,this.objects);
+	},
 
-	tooltip: tooltip,
+	label: function(options) {		
+
+		return label(options, this.objects)
+	},
+
+	tooltip: function(options) {		
+
+		return tooltip(options, this.objects)
+	},
 
 	tube: function (options) {
-		this.setDefaultView(options, this.options);
-		return tube(options, this.world)
+		this.setDefaultView(options, this.options);		
+
+		return tube(options, this.world, this.objects)
 	},
 
 	extrusion: function (options) {
-		this.setDefaultView(options, this.options);
-		return extrusion(options);
+		this.setDefaultView(options, this.options);		
+
+		return extrusion(options, this.objects);
 	},
 
 	Object3D: function (options) {
-		this.setDefaultView(options, this.options);
-		return Object3D(options)
+		this.setDefaultView(options, this.options);		
+
+		return Object3D(options, this.objects)
 	},
 
-	loadObj: async function loadObj(options, cb) {
+	loadObj: async function loadObj(options, cb) {		
+
 		this.setDefaultView(options, this.options);
+		const inst = this;
 		if (options.clone === false) {
 			return new Promise(
 				async (resolve) => {
 					loader(options, cb, async (obj) => {
 						resolve(obj);
-					});
+					}, inst.objects);
 				});
 		}
 		else {
@@ -728,6 +743,7 @@ Threebox.prototype = {
 						console.error("Could not load model file: " + options.obj);
 					});
 			} else {
+				const inst = this;
 				this.objectsCache.set(options.obj, {
 					promise: new Promise(
 						async (resolve, reject) => {
@@ -737,7 +753,7 @@ Threebox.prototype = {
 								} else {
 									reject(obj);
 								}
-							});
+							}, this.objects);
 						})
 				});
 

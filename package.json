@@ -14,7 +14,7 @@
     },
     "homepage": "https://github.com/jscastro76/threebox#readme",
     "scripts": {
-        "build": "browserify -p tinyify exports.js > dist/threebox.min.js && ncp ./examples/css/threebox.css ./dist/threebox.css --stopOnErr",
+        "build": "browserify -p tinyify exports.js > dist/threebox.min.js && ncp ./examples/css/threebox.css ./dist/threebox.css --stopOnErr && ncp ./index.d.ts ./dist/threebox-plugin.d.ts --stopOnErr",
         "dev": "watchify exports.js --verbose -o dist/threebox.js ",
         "all": "browserify -p tinyify exports.js > dist/threebox.min.js && watchify exports.js --verbose -o dist/threebox.js ",
         "test": "browserify tests/threebox-tests.js > tests/threebox-tests-bundle.js",
@@ -40,5 +40,9 @@
         "mapbox-gl-js",
         "azure-maps",
         "3D"
-    ]
+    ],
+    "dependencies": {
+        "@types/mapbox-gl": "^3.1.0",
+        "@types/three": "^0.164.0"
+    }
 }

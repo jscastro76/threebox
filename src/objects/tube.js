@@ -8,7 +8,7 @@ const Objects = require('./objects.js');
 const THREE = require("../three.js");
 const Object3D = require('./Object3D.js');
 
-function tube(opt, world){
+function tube(opt, world, objects){
 
 	// validate and prep input geometry
 	opt = utils._validate(opt, Objects.prototype._defaults.tube);
@@ -22,7 +22,7 @@ function tube(opt, world){
 	let mat = material(opt);
 	let obj = new THREE.Mesh(tube, mat);
 	//[jscastro] we convert it in Object3D to add methods, bounding box, model, tooltip...
-	return new Object3D({ obj: obj, units: opt.units, anchor: opt.anchor, adjustment: opt.adjustment, bbox: opt.bbox, tooltip: opt.tooltip, raycasted: opt.raycasted });
+	return new Object3D({ obj: obj, units: opt.units, anchor: opt.anchor, adjustment: opt.adjustment, bbox: opt.bbox, tooltip: opt.tooltip, raycasted: opt.raycasted }, objects);
 }
 
 module.exports = exports = tube;

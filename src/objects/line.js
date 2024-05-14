@@ -2,7 +2,7 @@ const THREE = require("../three.js");
 const utils = require("../utils/utils.js");
 const Objects = require('./objects.js');
 
-function line(obj){
+function line(obj, objects){
 
 	obj = utils._validate(obj, Objects.prototype._defaults.line);
 
