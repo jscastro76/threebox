@@ -781,6 +781,11 @@ Objects.prototype = {
 				} else if (obj.fixedZoom) {
 					if (scale) obj.userData.mapScale = scale;
 					obj.setFixedZoom(obj.userData.mapScale); //apply fixed zoom
+				} else if (obj.userData.units === "scene" && typeof scale === "number") {
+					const initialScale = obj.userData.scale;
+					const newScale = scale / initialScale;
+					obj.scale.set(newScale, newScale, newScale);
+					tb.map.repaint = true;
 				} else obj.scale.set(1, 1, 1);
 			} 
 
