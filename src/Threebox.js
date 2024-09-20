@@ -837,7 +837,7 @@ Threebox.prototype = {
 	},
 
 	//[jscastro] method to set the height of all the objects in a level. this only works if the objects have a geojson feature
-	setLayerHeigthProperty: function (layerId, level) {
+	setLayerHeightProperty: function (layerId, level) {
 		let layer = this.map.getLayer(layerId);
 		if (!layer) return;
 		if (layer.type == "fill-extrusion") {
