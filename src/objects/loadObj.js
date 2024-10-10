@@ -41,10 +41,16 @@ function loadObj(options, cb, promise) {
 			break;
 	}
 
-	materialLoader.withCredentials = options.withCredentials;
-	materialLoader.load(options.mtl, loadObject, () => (null), error => {
-		console.warn("No material file found " + error.stack);
-	});
+	if (options.mtl){
+		materialLoader.withCredentials = options.withCredentials;
+		materialLoader.load(options.mtl, loadObject, () => (null), error => {
+			console.warn("No material file found " + error.stack);
+		});
+	}
+	else{
+		loadObject(undefined)
+	}
+	
 
 	function loadObject(materials) {
 
