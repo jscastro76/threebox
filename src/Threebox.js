@@ -554,7 +554,7 @@ Threebox.prototype = {
 
 		// Check if map is already loaded (e.g., in React apps)
 		if (this.map.loaded()) {
-			setupEventHandlers.call(this.map);
+			setupEventHandlers();
 		} else {
 			this.map.on('load', setupEventHandlers);
 		}
