@@ -132,7 +132,9 @@ Threebox.prototype = {
 		});
 
 		//[jscastro] new event map on load
-		this.map.on('load', function () {
+		// [jscastro] check if map is already loaded (e.g., in React apps) and setup events immediately
+		// otherwise wait for the load event
+		const setupEventHandlers = function () {
 
 			//[jscastro] new fields to manage events on map
 			this.selectedObject; //selected object through click
@@ -548,7 +550,14 @@ Threebox.prototype = {
 			document.addEventListener('keydown', onKeyDown.bind(this), true);
 			document.addEventListener('keyup', onKeyUp.bind(this));
 
-		});
+		}.bind(this.map);
+
+		// Check if map is already loaded (e.g., in React apps)
+		if (this.map.loaded()) {
+			setupEventHandlers();
+		} else {
+			this.map.on('load', setupEventHandlers);
+		}
 
 	},
 
