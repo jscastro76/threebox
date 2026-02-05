@@ -556,7 +556,7 @@ Threebox.prototype = {
 		if (this.map.loaded()) {
 			setupEventHandlers();
 		} else {
-			this.map.on('load', setupEventHandlers);
+			this.map.once('load', setupEventHandlers);
 		}
 
 	},
