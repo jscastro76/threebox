@@ -1703,7 +1703,13 @@ AnimationManager.prototype = {
 			}
 
 			if (s) {
-				this.scale.set(s[0], s[1], s[2]);
+				if (this.userData.units === "scene" && typeof s === "number") {
+					const initialScale = this.userData.scale;
+					const newScale = s / initialScale;
+					obj.scale.set(newScale, newScale, newScale);
+				} else {
+					this.scale.set(s[0], s[1], s[2]);
+				}
 				options.scale = this.scale;
 			}
 
@@ -17901,6 +17907,11 @@ Objects.prototype = {
 				} else if (obj.fixedZoom) {
 					if (scale) obj.userData.mapScale = scale;
 					obj.setFixedZoom(obj.userData.mapScale); //apply fixed zoom
+				} else if (obj.userData.units === "scene" && typeof scale === "number") {
+					const initialScale = obj.userData.scale;
+					const newScale = scale / initialScale;
+					obj.scale.set(newScale, newScale, newScale);
+					tb.map.repaint = true;
 				} else obj.scale.set(1, 1, 1);
 			} 
 
