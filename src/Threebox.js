@@ -103,6 +103,7 @@ Threebox.prototype = {
 		this.terrainExaggeration = 1.0;
 		this.terrainLayerName = '';
 		this.enableSelectingFeatures = this.options.enableSelectingFeatures || false;
+		this.enableIterativeSelection = this.options.enableIterativeSelection || false;
 		this.enableSelectingObjects = this.options.enableSelectingObjects || false;
 		this.enableDraggingObjects = this.options.enableDraggingObjects || false;
 		this.enableRotatingObjects = this.options.enableRotatingObjects || false;
@@ -252,8 +253,11 @@ Threebox.prototype = {
 				intersectionExists = typeof intersects[0] == 'object';
 				// if intersect exists, highlight it
 				if (intersectionExists) {
+					let intersectionIndex = 0;
+					if(this.tb.enableIterativeSelection)
+						intersectionIndex = this.tb.getIteratedSelectionIndex(intersects);
 
-					let nearestObject = Threebox.prototype.findParent3DObject(intersects[0]);
+					let nearestObject = Threebox.prototype.findParent3DObject(intersects[intersectionIndex]);
 
 					if (nearestObject) {
 						//if extrusion object selected, unselect
@@ -787,6 +791,38 @@ Threebox.prototype = {
 		return utils.getObjectHeightOnFloor(feature, obj, level);
 	},
 
+	intersectionStack: [],
+	selectionRotationIndex: 0, 
+	getIteratedSelectionIndex(intersects) {
+		if(intersects.length == 0) return null;
+
+		const intersectedObjects = intersects
+		.map((intersection) => intersection.object)
+
+		if(this.utils.arrayShallowEqual(this.intersectionStack, intersectedObjects))
+		{
+			// if the same objects in the same order are clicked,
+			// simply go to the next object
+			this.selectionRotationIndex = (this.selectionRotationIndex + 1) % this.intersectionStack.length;
+		} else {
+			// in this case the objects that are clicked differ from last call
+			this.intersectionStack = intersectedObjects;
+			if(this.map.selectedObject) {
+				// if we already have an object selected, find it in the stack.
+				// this will work even when the previously selected object is not
+				// in the new stack, as findIndex will return -1 and
+				// therefore selectionStackIndex + 1 will come out as 0.
+				const selectionStackIndex = this.intersectionStack.findIndex(entry => entry == this.map.selectedObject.children[0].children[0]);
+				this.selectionRotationIndex = (selectionStackIndex + 1) % this.intersectionStack.length;
+			} else {
+				// if we don't have any object selected yet simply start
+				// with the first one (closest one to the camera)
+				this.selectionRotationIndex = 0;
+			}
+		}
+		return this.selectionRotationIndex;
+	},
+
 	queryRenderedFeatures: function (point) {
 
 		let mouse = new THREE.Vector2();
@@ -798,7 +834,9 @@ Threebox.prototype = {
 		this.raycaster.setFromCamera(mouse, this.camera);
 
 		// calculate objects intersecting the picking ray
-		let intersects = this.raycaster.intersectObjects(this.world.children, true);
+		let intersects = this.raycaster
+		.intersectObjects(this.world.children, true)
+		.filter(intersection => 'selectable' in intersection.object ? intersection.object.selectable : true)
 
 		return intersects
 	},
@@ -1188,6 +1226,7 @@ var defaultOptions = {
 	enableSelectingObjects: false,
 	enableDraggingObjects: false,
 	enableRotatingObjects: false,
+	enableIterativeSelection: true,
 	enableTooltips: false,
 	enableHelpTooltips: false,
 	multiLayer: false,
