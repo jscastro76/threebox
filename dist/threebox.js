@@ -1764,7 +1764,7 @@ AnimationManager.prototype = {
 		obj.playAnimation = function (options) {
 			if (obj.mixer) {
 
-				if (options.animation) {
+				if (options.animation>=0) {
 					setAction(options.animation)
 				}
 				obj.playDefault(options);
