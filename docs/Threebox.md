@@ -695,9 +695,9 @@ Method to remove a layer from Mapbox, including all 3D objects from Threebox sce
 <br>
 
 
-#### setLayerHeigthProperty 
+#### setLayerHeightProperty 
 ```js
-tb.setLayerHeigthProperty(layerId, level) 
+tb.setLayerHeightProperty(layerId, level) 
 ```
 Method to set the height of all the objects in a level. 
 This method only works if the objects have a [*GeoJson*](https://geojson.org/) feature, and a `level` attribute among its properties.
