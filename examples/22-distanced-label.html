@@ -1,0 +1,174 @@
+<!doctype html>
+<head>
+    <title>Threebox raycaster of Objects3D, 3D models and Fill-extrusions</title>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
+    <script src="../dist/threebox.js" type="text/javascript"></script>
+    <link href="../dist/threebox.css" rel="stylesheet" />
+    <script src="config.js"></script>
+    <style>
+        body, html {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+
+        .distance {
+            position: absolute;
+            top: 0;
+            left: 100px;
+            background: white;
+            padding: 5px;
+            margin: 5px;      
+            border: solid 2px black;          
+        }
+    </style>
+</head>
+<body>
+    <div id='map' class='map'></div>
+    <div class='distance'> Current distance from cube to camera (units): <span id="threshold"></span></div>
+    <script type="module">
+        if (!config) console.error("Config not set! Make a copy of 'config_template.js', add in your access token, and save the file as 'config.js'.");
+
+		mapboxgl.accessToken = config.accessToken;
+        let origin = [-122.3512, 47.6202, 0];
+	    let minZoom = 12;
+        
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/outdoors-v11',
+            center: origin,
+            zoom: 16.5,
+            pitch: 60,
+            antialias: true,
+            heading: 0, hash: true
+        });
+
+        // we can add Threebox to mapbox to add built-in mouseover/mouseout and click behaviors
+        window.tb = new Threebox(
+            map,
+            map.getCanvas().getContext('webgl'),
+            {
+                defaultLights: true,
+                enableTooltips: true, // change this to false to disable default tooltips on fill-extrusion and 3D models
+            }
+        );
+
+       	import { GUI } from 'https://threejs.org/examples/jsm/libs/lil-gui.module.min.js';
+		import Stats from 'https://threejs.org/examples/jsm/libs/stats.module.js';
+
+		let stats, gui;
+        let cube;
+        const customLabelName = 'customLabel'; // fixed inside threebox
+            
+		function animate() {
+			requestAnimationFrame(animate);
+			stats.update();
+		}
+
+		var active = false
+		map.on('style.load', function () {
+			init();
+
+            map.addLayer({
+                id: 'custom_layer',
+                type: 'custom',
+                renderingMode: '3d',
+                onAdd: function (map, mbxContext) {
+
+                    tb.altitudeStep = 1;
+
+                    // initialize geometry and material of our cube object
+                    var geometry = new THREE.BoxGeometry(30, 60, 120);
+                    var redMaterial = new THREE.MeshPhongMaterial({
+                        color: 0x660000,
+                        side: THREE.DoubleSide
+                    });
+
+                    // we add a cube with no bbox and despite is raycasted
+                    cube = new THREE.Mesh(geometry, redMaterial);
+                    cube = tb.Object3D({ obj: cube, units: 'meters', bbox: false})
+                        .setCoords(origin);
+					tb.add(cube);
+                    createLabel(cube, "The object has custom label that appears when camera is close to the object");
+                },
+
+                render: function (gl, matrix) {
+                    if (cube) updateLabel(cube, api.threshold);
+                    tb.update();
+                }
+            });
+
+        });
+
+        function createLabel(
+            object3D,
+            text,
+        ) {
+            if (object3D.scaleGroup.getObjectByName(customLabelName)) {
+                console.warn(`Cube already containes label with name ${customLabelName}`);
+            }
+            // note: we add label ourself because we need low control of parameters
+            // threebox-plugin also contains labels with fixed names, but we want to control visibility ourselves
+            // create div element
+            const divLabel = document.createElement('div');
+            divLabel.innerHTML = text;
+            // add label to the object in the center
+            const relativeHeight = 0.5;
+            const label3D = object3D.addCSS2D(divLabel, customLabelName, object3D.anchor, relativeHeight);
+            label3D.element.style.color = 'red';
+            label3D.element.style.background = 'white';
+            label3D.element.style.border = '2px solid black';
+            label3D.element.style.borderRadius = '6px';
+            label3D.element.style.padding = '5px';
+        };
+        
+        const distanceFromCamera = (() => {
+            // performance threejs trick: temp object to decrease number of "new" in every frame
+            // their values are required only during one function call so it's a static function variable
+            const tempVector3 = new THREE.Vector3();
+            return (object3D) => {
+                // get camera position in world
+                tempVector3.setFromMatrixPosition(tb.camera.matrixWorld); 
+                // get camera position in local cube's coordinate system
+                const targetInLocalSpace = object3D.worldToLocal(tempVector3);
+                // length of the vector representing position is a distance
+                const distance = targetInLocalSpace.length();
+                return distance;
+            }
+        })();
+
+        function updateLabel(object3D, thresholdDistance) {
+            const distance = distanceFromCamera(object3D.model);
+            {// update shown distance value
+                let input = document.getElementById('threshold');
+                input.innerHTML="" + Math.floor(distance);
+            }
+            if (!distance) console.warn(`Zero link distance`);
+            const label3D = object3D.scaleGroup.getObjectByName(customLabelName);
+            if (label3D) label3D.visible = distance < thresholdDistance;
+        }
+
+        let api = {
+			threshold: 800,
+		};
+
+        function init() {
+			// stats
+			stats = new Stats();
+			map.getContainer().appendChild(stats.dom);
+			animate();
+			// gui
+			gui = new GUI();
+            // this will set distance threshold use for custom label visibility control
+            // (force map repaint to update label visibility (see layer.render(...) method))
+			gui.add(api, 'threshold', 500, 1500).step(10).onChange(()=>map.triggerRepaint()); 
+		}
+    </script>
+</body>
+
