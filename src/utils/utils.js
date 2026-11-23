@@ -14,6 +14,25 @@ var utils = {
 		}
 	},
 
+	// adapted from https://stackoverflow.com/a/14853974/5669145
+	arrayShallowEqual: function(first, second) {
+		// if array is a falsy value, return
+		if (!first || !second)
+			return false;
+	
+		// compare lengths - can save a lot of time 
+		if (first.length != second.length)
+			return false;
+	
+		for (var i = 0, l = first.length; i < l; i++) {       
+			if (first[i] != second[i]) { 
+				// Warning - two different object instances will never be equal: {x:20} != {x:20}
+				return false;   
+			}           
+		}       
+		return true;
+	},
+
 	makePerspectiveMatrix: function (fovy, aspect, near, far) {
 
 		var out = new THREE.Matrix4();
